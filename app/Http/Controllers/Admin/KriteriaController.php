@@ -42,6 +42,7 @@ class KriteriaController extends Controller
     // Update data
     public function update(Request $request, $id)
     {
+        
     }
 
     // Hapus data

@@ -11,7 +11,13 @@ Route::group(['middleware' => ['auth']], function () {
 
 
      
-        require_once 'admin/dosen.php';
+        require_once 'admin/kategori.php';
+        require_once 'admin/kriteria.php';
+        require_once 'admin/penilaian.php';
+        require_once 'admin/rekomendasi.php';
+        require_once 'admin/skala.php';
+        require_once 'admin/user.php';
+        require_once 'admin/wisata.php';
        
     });
 });
