@@ -6,5 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kriteria extends Model
 {
-    //
+    public $timestamps = false;
+     protected $fillable = [
+        'kriteria',
+        'bobot',
+        'jenis',
+    ];
+    
 }

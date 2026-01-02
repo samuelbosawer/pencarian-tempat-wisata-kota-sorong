@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kriterias', function (Blueprint $table) {
+        Schema::create('detail_penilaians', function (Blueprint $table) {
             $table->id();
-            $table->string('kriteria')->nullable();
-            $table->string('bobot')->nullable();
-            $table->string('jenis')->nullable();
+            $table->unsignedBigInteger('penilaian_id');
+            $table->unsignedBigInteger('kriteria_id');
+            $table->unsignedBigInteger('skala_penilaian_id');
         });
     }
 
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kriterias');
+        Schema::dropIfExists('detail_penilaians');
     }
 };

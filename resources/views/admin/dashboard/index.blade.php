@@ -21,13 +21,12 @@
                                 <div class="card-body">
                                     <h4 class="fw-semibold d-block mb-1 text-dark">Temoat Wisata</h4>
                                     <h1>{{ $jumlahSkripsi ?? 0 }}</h1>
-                                    <a href="{{ route('dashboard') }}">Detail</a>
+                                    <a href="{{ route('dashboard.wisata') }}">Detail</a>
                                 </div>
                             </div>
                         </div>
 
                      
-                    @endif
 
 
 

@@ -16,7 +16,7 @@
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Login SIAK Prodi Ilmu Komunikasi UM Papua</title>
+    <title>Login Aplikasi Pemilihan Tempat Wisata Kota Sorong </title>
 
     <meta name="description" content="" />
 
@@ -65,11 +65,11 @@
               <!-- Logo -->
                 <div class="text-center">
                    <img width="100px" class="p-3" src="{{ asset('assets/img/logo.png') }}" alt="" srcset="">
-                       <h3 class="fw-bold">SIAK <br> Prodi Ilmu Komunikasi <br>  UM Papua</h3>
+                       <h3 class="fw-bold">Apikasi Pemilihan <br> Tempat Wisata <br>  Kota Sorong</h3>
                 </div>
               <!-- /Logo -->
               {{-- <h4 class="mb-2 mt-5 text-center">Selamat Datang</h4> --}}
-              <p class="mb-4 text-center">Silakan masuk ke akun Anda untuk mengakses Sistem Informasi Akademik</p>
+              <p class="mb-4 text-center">Silakan masuk ke akun Anda untuk mengakses Sistem ini sekarang juga</p>
 
               <form id="formAuthentication" class="mb-3"  method="POST" action="{{ route('login') }}">
                  @csrf

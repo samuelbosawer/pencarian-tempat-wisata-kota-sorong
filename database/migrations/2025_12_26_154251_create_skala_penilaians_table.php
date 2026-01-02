@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('skala_penilaians', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_s')->nullable();
+            $table->string('nilai_s')->nullable();
             $table->timestamps();
         });
     }
