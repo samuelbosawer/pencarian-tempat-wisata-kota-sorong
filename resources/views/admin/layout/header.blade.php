@@ -56,6 +56,33 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('/assets/js/config.js') }}"></script>
+
+
+
+    <style>
+    .user-card-hover {
+        transition: all 0.3s ease;
+        border-radius: 1rem !important;
+    }
+    .user-card-hover:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+    }
+    .card-gradient {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(13, 110, 253, 0.05) 0%, rgba(102, 16, 242, 0.08) 100%);
+        pointer-events: none;
+        border-radius: inherit;
+    }
+    .avatar-xl {
+        width: 80px;
+        height: 80px;
+        font-size: 2.5rem;
+    }
+</style>
+
+
   </head>
 
   <body>
