@@ -13,14 +13,19 @@ class SkalaPenilaianSeeder extends Seeder
      */
     public function run(): void
     {
-         $skala = SkalaPenilaian::create([
-            'nama_s' => 'tes',
-            'nilai_s' => '1',
-        ]);
+         $skalas = [
+    1 => 'Sangat Kurang',
+    2 => 'Kurang',
+    3 => 'Cukup',
+    4 => 'Baik',
+    5 => 'Sangat Baik',
+];
 
-         $skala = SkalaPenilaian::create([
-            'nama_s' => 'tes 2',
-            'nilai_s' => '2',
-        ]);
+foreach ($skalas as $nilai => $nama) {
+    SkalaPenilaian::create([
+        'nama_s'  => $nama,
+        'nilai_s' => $nilai,
+    ]);
+}
     }
 }

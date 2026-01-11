@@ -15,19 +15,21 @@ class WisataSeeder extends Seeder
     {
         $data = [
             [
-                'nama_w' => 'Bunker dan Goa Jepang',
-                'gambar_w' => 'https://placehold.co/600x400?text=Tempat+Wisata',
-                'desk_w' => 'Situs bersejarah peninggalan Perang Dunia II berupa bunker dan goa yang digunakan tentara Jepang, menjadi destinasi wisata sejarah di Sorong.',
-                'user_id' => 2,
-                'kategori_wisata_id' => 3, // Wisata Sejarah
-            ],
-            [
                 'nama_w' => 'Tanjung Kasuari Sorong',
                 'gambar_w' => 'https://placehold.co/600x400?text=Tempat+Wisata',
                 'desk_w' => 'Pantai dengan pasir putih dan panorama matahari terbenam yang indah, cocok untuk rekreasi keluarga dan wisata alam.',
                 'user_id' => 2,
                 'kategori_wisata_id' => 1, // Wisata Alam
             ],
+
+            [
+                'nama_w' => 'Bunker dan Goa Jepang',
+                'gambar_w' => 'https://placehold.co/600x400?text=Tempat+Wisata',
+                'desk_w' => 'Situs bersejarah peninggalan Perang Dunia II berupa bunker dan goa yang digunakan tentara Jepang, menjadi destinasi wisata sejarah di Sorong.',
+                'user_id' => 2,
+                'kategori_wisata_id' => 3, // Wisata Sejarah
+            ],
+
             [
                 'nama_w' => 'Pantai Dofior',
                 'gambar_w' => 'https://placehold.co/600x400?text=Tempat+Wisata',

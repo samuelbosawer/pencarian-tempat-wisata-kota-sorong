@@ -55,14 +55,20 @@
              </ul>
          </li>
 
+           <li class="menu-item @if (Request::segment(1) == 'dashboard' && Request::segment(2) == 'kriteria') active @endif">
+             <a href="{{ route('dashboard.kriteria') }}" class="menu-link">
+                 <i class="menu-icon tf-icons bx bx-collection"></i>
+                 <div data-i18n="Analytics">Data Kriteria</div>
+             </a>
+         </li>
+
+
            <li class="menu-item @if (Request::segment(1) == 'dashboard' && Request::segment(2) == 'skala') active @endif">
              <a href="{{ route('dashboard.skala') }}" class="menu-link">
                  <i class="menu-icon tf-icons bx bx-box"></i>
                  <div data-i18n="Analytics">Data Skala Penilaian</div>
              </a>
          </li>
-
-
 
          <li class="menu-item @if (Request::segment(1) == 'dashboard' && Request::segment(2) == 'penilaian') active @endif">
              <a href="{{ route('dashboard.penilaian') }}" class="menu-link">
