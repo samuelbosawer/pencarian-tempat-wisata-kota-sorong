@@ -24,59 +24,8 @@ class HomeController extends Controller
     public function index()
     {
 
-        return redirect()->route('login');
-
-    //      $jumlahDosen     = Dosen::count();
-    //     $jumlahKkn        = Kkn::count();
-    //     $jumlahMagang     = Magang::count();
-    //     $jumlahMahasiswa  = Mahasiswa::count();
-    //     $jumlahProposal   = Proposal::count();
-    //     $jumlahSkripsi    = Skripsi::count();
-
-    //    $pengumuman = Pengumuman::latest('id')
-    //                     ->limit(3)
-    //                     ->get();
-
-        
-    //     return view('visitor.home',compact(
-    //         'jumlahDosen',
-    //         'jumlahKkn',
-    //         'jumlahMagang',
-    //         'jumlahMahasiswa',
-    //         'jumlahProposal',
-    //         'jumlahSkripsi',
-    //         'pengumuman'
-    //     ));
+       return view('visitor.home');
     }
 
-    public function sejarah()
-    {
-        $data = Prodi::where('id',1)->first();
-        return view('visitor.sejarah',compact('data'));
-    }
-    
-    public function visi_misi()
-    {
-        $data = Prodi::where('id',1)->first();
-        return view('visitor.visi-misi',compact('data'));
-    }
-
-    public function struktur()
-    {
-        $data = Prodi::where('id',1)->first();
-        return view('visitor.struktur',compact('data'));
-    }
-
-    public function dosen()
-    {
-        $datas = Dosen::get();
-        return view('visitor.dosen',compact('datas'));
-    }
-
-    public function pengumuman()
-    {
-        $datas = Pengumuman::get();
-        return view('visitor.pengumuman',compact('datas'));
-
-    }
+   
 }

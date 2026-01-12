@@ -78,6 +78,14 @@
          </li>
 
 
+          <li class="menu-item @if (Request::segment(1) == 'dashboard' && Request::segment(2) == 'rekomendasi') active @endif">
+             <a href="{{ route('dashboard.rekomendasi') }}" class="menu-link">
+                 <i class="menu-icon tf-icons bx bx-star"></i>
+                 <div data-i18n="Analytics">Rekomendasi</div>
+             </a>
+         </li>
+
+
 
 
 
