@@ -2,38 +2,41 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title> SIAK Prodi Ilmu Komunikasi UM Papua </title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/logo.png') }}" />
-    <!-- Favicons -->
-    <link href="{{ asset('assets/img/logo.png') }}" rel="apple-touch-icon">
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com" rel="preconnect">
-    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
 
-    <!-- Vendor CSS Files -->
-    <link href="/assets-visitor/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/assets-visitor/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="/assets-visitor/vendor/aos/aos.css" rel="stylesheet">
-    <link href="/assets-visitor/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="/assets-visitor/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <title>Wisata Kota Sorong</title>
 
-    <!-- Main CSS File -->
-    <link href="/assets-visitor/css/main.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="{{ asset('visitor/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
-    <!-- =======================================================
-  * Template Name: Mentor
-  * Template URL: https://bootstrapmade.com/mentor-free-education-bootstrap-theme/
-  * Updated: Jul 07 2025 with Bootstrap v5.3.7
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{{ asset('visitor/assets/css/fontawesome.css') }}">
+    <link rel="stylesheet" href="{{ asset('visitor/assets/css/templatemo-woox-travel.css') }}">
+    <link rel="stylesheet" href="{{ asset('visitor/assets/css/owl.css') }}">
+    <link rel="stylesheet" href="{{ asset('visitor/assets/css/animate.css') }}">
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/logo.png') }}" />
+
 </head>
+
+<body>
+    @include('sweetalert::alert')
+    <!-- ***** Preloader Start ***** -->
+    <div id="js-preloader" class="js-preloader">
+        <div class="preloader-inner">
+            <span class="dot"></span>
+            <div class="dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Preloader End ***** -->

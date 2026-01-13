@@ -41,7 +41,7 @@
                                             </div>
                                             <div class="col-lg-3 col-sm-6 col-6">
                                                 <div class="main-button">
-                                                    <a href="{{ route('wisata') }}">Lihat Wisata</a>
+                                                    <a href="#wisata">Lihat Wisata</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -79,7 +79,7 @@
                                             </div>
                                             <div class="col-lg-3 col-sm-6 col-6">
                                                 <div class="main-button">
-                                                    <a href="{{ route('wisata') }}">Lihat Wisata</a>
+                                                    <a href="#wisata">Lihat Wisata</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -117,7 +117,7 @@
                                             </div>
                                             <div class="col-lg-3 col-sm-6 col-6">
                                                 <div class="main-button">
-                                                    <a href="{{ route('wisata') }}">Lihat Wisata</a>
+                                                    <a href="#wisata">Lihat Wisata</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -155,7 +155,7 @@
                                             </div>
                                             <div class="col-lg-3 col-sm-6 col-6">
                                                 <div class="main-button">
-                                                    <a href="{{ route('wisata') }}">Lihat Wisata</a>
+                                                    <a href="#wisata">Lihat Wisata</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -229,7 +229,7 @@
                                                   
                                                         <p><i class="fa fa-user"></i> {{ $w->penilaian->count()}} </p>
                                                     <div class="text-button">
-                                                        <a href="{{ route('detail', $w->id) }}">Lihat Detail <i
+                                                        <a href="about.html">Lihat Detail <i
                                                                 class="fa fa-arrow-right"></i></a>
                                                     </div>
                                                 </div>
@@ -262,7 +262,7 @@
     </div>
 
    <div class="call-to-action">
-<div class="container">
+    <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-8">
                 <h2>Siap Menjelajahi Wisata Kota Sorong?</h2>
@@ -270,7 +270,7 @@
             </div>
             <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
                 <div class="border-button">
-                    <a href="{{ route('wisata') }}">Lihat Destinasi Wisata</a>
+                    <a href="#wisata">Lihat Destinasi Wisata</a>
                 </div>
             </div>
         </div>
