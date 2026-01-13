@@ -1,279 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Akun - Aplikasi Pemilihan Tempat Wisata Kota Sorong</title>
+   <!-- Bootstrap core CSS -->
+    <link href="{{ asset('visitor/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Boxicons -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <!-- Google Fonts untuk font modern -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-@extends('visitor.layout.tamplate')
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/logo.png') }}" />
 
-@section('content')
-    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #2596be 0%, #0f4d64 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+        .authentication-wrapper {
+            width: 100%;
+            max-width: 700px;
+            padding: 20px;
+        }
+        .card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+            overflow: hidden;
+        }
+        .card-body {
+            padding: 40px;
+        }
+        .logo-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo-section img {
+            width: 200px;
+            height: auto;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+        }
+        .logo-section h3 {
+            color: #333;
+            font-weight: 700;
+            font-size: 1.5rem;
+            line-height: 1.3;
+            margin: 0;
+        }
+        .welcome-text {
+            text-align: center;
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+        .form-label {
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        .form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 12px 16px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus {
+            border-color: #2596be;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+        .input-group-text {
+            border: 2px solid #e9ecef;
+            border-left: none;
+            background: #fff;
+            border-radius: 0 12px 12px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .input-group-text:hover {
+            background: #f8f9fa;
+        }
+        .form-check-input:checked {
+            background-color: #2596be;
+            border-color: #2596be;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #2596be 0%, #0f4d64 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        .text-danger {
+            font-size: 0.85rem;
+            margin-top: 5px;
+        }
+        .form-password-toggle {
+            position: relative;
+        }
+        .input-group {
+            position: relative;
+        }
+        .input-group input {
+            border-right: none;
+            border-radius: 12px 0 0 12px;
+        }
+        @media (max-width: 576px) {
+            .card-body {
+                padding: 30px 20px;
+            }
+            .logo-section h3 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
 
-    <!-- ***** Main Banner Area Start ***** -->
-    <section id="section-1">
-        <div class="content-slider">
-            <input type="radio" id="banner1" class="sec-1-input" name="banner" checked>
-            <input type="radio" id="banner2" class="sec-1-input" name="banner">
-            <input type="radio" id="banner3" class="sec-1-input" name="banner">
-            <input type="radio" id="banner4" class="sec-1-input" name="banner">
-            <div class="slider">
-
-                <!-- SLIDE 1 -->
-                <div id="top-banner-1" class="banner">
-                    <div class="banner-inner-wrapper header-text">
-                        <div class="main-caption">
-                            <h2>Jelajahi Keindahan Wisata</h2>
-                            {{-- <img src="{{ asset('assets/img/logo.png') }}" class="" width="10px" alt="" srcset="" style="width: 200px"> --}}
-                            <h1>Kota Sorong</h1>
-                            <div class="border-button"><a href="#wisata">Jelajahi</a></div>
+    <!-- Template CSS -->
+    <script src="assets/js/vendors/color-modes.js"></script>
+    <link href="assets/css/main.css?v=6.1" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="container-xxl mx-auto">
+        <div class="authentication-wrapper authentication-basic mx-auto">
+            <div class="authentication-inner">
+                <!-- Login Card -->
+                <div class="card">
+                    <div class="card-body">
+                        <!-- Logo Section -->
+                        <div class="logo-section">
+                            <img width="80px" class="p-3" src="{{ asset('assets/img/logo.png') }}" alt="Logo Aplikasi" srcset="">
+                            <h3 class="fw-bold">Daftar Akun </h3>
                         </div>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="more-info">
-                                        <div class="row">
-                                            <div class="col-lg-3 col-sm-6 col-6">
-                                                <i class="fa fa-map-marker"></i>
-                                                <h4><span>Lokasi:</span><br>Papua Barat Daya</h4>
-                                            </div>
-                                            <div class="col-lg-3 col-sm-6 col-6">
-                                                <i class="fa fa-tree"></i>
-                                                <h4><span>Wisata Alam:</span><br>Pantai & Laut</h4>
-                                            </div>
-                                            <div class="col-lg-3 col-sm-6 col-6">
-                                                <i class="fa fa-camera"></i>
-                                                <h4><span>Daya Tarik:</span><br>Fotografi</h4>
-                                            </div>
-                                            <div class="col-lg-3 col-sm-6 col-6">
-                                                <div class="main-button">
-                                                    <a href="#wisata">Lihat Wisata</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SLIDE 2 -->
-                <div id="top-banner-2" class="banner">
-                    <div class="banner-inner-wrapper header-text">
-                        <div class="main-caption">
-                            <h2>Gerbang Menuju Raja Ampat</h2>
-                            <h1>Kota Sorong</h1>
-                            <div class="border-button"><a href="#wisata">Jelajahi</a></div>
-                        </div>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="more-info">
-                                        <div class="row">
-                                            <div class="col-lg-3 col-sm-6 col-6">
-                                                <i class="fa fa-ship"></i>
-                                                <h4><span>Akses:</span><br>Pelabuhan & Bandara</h4>
-                                            </div>
-                                            <div class="col-lg-3 col-sm-6 col-6">
-                                                <i class="fa fa-water"></i>
-                                                <h4><span>Laut:</span><br>Eksotis</h4>
-                                            </div>
-                                            <div class="col-lg-3 col-sm-6 col-6">
-                                                <i class="fa fa-users"></i>
-                                                <h4><span>Budaya:</span><br>Lokal Papua</h4>
-                                            </div>
-                                            <div class="col-lg-3 col-sm-6 col-6">
-                                                <div class="main-button">
-                                                    <a href="#wisata">Lihat Wisata</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SLIDE 3 -->
-                <div id="top-banner-3" class="banner">
-                    <div class="banner-inner-wrapper header-text">
-                        <div class="main-caption">
-                            <h2>Pesona Alam & Budaya</h2>
-                            <h1>Kota Sorong</h1>
-                            <div class="border-button"><a href="#wisata">Jelajahi</a></div>
-                        </div>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="more-info">
-                                        <div class="row">
-                                            <div class="col-lg-3 col-sm-6 col-6">
-                                                <i class="fa fa-leaf"></i>
-                                                <h4><span>Alam:</span><br>Hutan & Pantai</h4>
-                                            </div>
-                                            <div class="col-lg-3 col-sm-6 col-6">
-                                                <i class="fa fa-music"></i>
-                                                <h4><span>Budaya:</span><br>Tarian & Adat</h4>
-                                            </div>
-                                            <div class="col-lg-3 col-sm-6 col-6">
-                                                <i class="fa fa-heart"></i>
-                                                <h4><span>Suasana:</span><br>Ramah & Aman</h4>
-                                            </div>
-                                            <div class="col-lg-3 col-sm-6 col-6">
-                                                <div class="main-button">
-                                                    <a href="#wisata">Lihat Wisata</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SLIDE 4 -->
-                <div id="top-banner-4" class="banner">
-                    <div class="banner-inner-wrapper header-text">
-                        <div class="main-caption">
-                            <h2>Destinasi Favorit Papua Barat Daya</h2>
-                            <h1>Kota Sorong</h1>
-                            <div class="border-button"><a href="#wisata">Jelajahi</a></div>
-                        </div>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="more-info">
-                                        <div class="row">
-                                            <div class="col-lg-3 col-sm-6 col-6">
-                                                <i class="fa fa-star"></i>
-                                                <h4><span>Rekomendasi:</span><br>Wisata Terbaik</h4>
-                                            </div>
-                                            <div class="col-lg-3 col-sm-6 col-6">
-                                                <i class="fa fa-map"></i>
-                                                <h4><span>Lokasi:</span><br>Mudah Dijangkau</h4>
-                                            </div>
-                                            <div class="col-lg-3 col-sm-6 col-6">
-                                                <i class="fa fa-thumbs-up"></i>
-                                                <h4><span>Penilaian:</span><br>Pengunjung</h4>
-                                            </div>
-                                            <div class="col-lg-3 col-sm-6 col-6">
-                                                <div class="main-button">
-                                                    <a href="#wisata">Lihat Wisata</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <nav>
-                <div class="controls">
-                    <label for="banner1"><span class="progressbar"><span
-                                class="progressbar-fill"></span></span><span class="text">1</span></label>
-                    <label for="banner2"><span class="progressbar"><span
-                                class="progressbar-fill"></span></span><span class="text">2</span></label>
-                    <label for="banner3"><span class="progressbar"><span
-                                class="progressbar-fill"></span></span><span class="text">3</span></label>
-                    <label for="banner4"><span class="progressbar"><span
-                                class="progressbar-fill"></span></span><span class="text">4</span></label>
-                </div>
-            </nav>
-        </div>
-    </section>
-    <!-- ***** Main Banner Area End ***** -->
-
-    <div class="visit-country">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="section-heading">
-                        <h2>Jelajahi Wisata Kota Sorong</h2>
-                        <p>Kota Sorong merupakan gerbang utama Papua Barat yang menawarkan keindahan alam, wisata
-                            bahari, budaya lokal, dan destinasi unggulan yang menarik untuk dikunjungi.</p>
-
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="items">
+                        <!-- /Logo Section -->
+                        <p class="welcome-text">Silakan dipilih anda daftar sebagai pengelola  tempat wisata atau pengunjung</p>
                         <div class="row">
+                            <div class="col">
+                                <a class="btn btn-primary d-grid w-100" href="{{ route('daftarpilih','usaha') }}">Pengelola Tempat Wisata</a>
+                            </div>
 
+                            <div class="col">
+                        <a class="btn btn-primary d-grid w-100" href="{{ route('daftarpilih','pengunjung') }}">Pengunjung</a>
 
-                            @foreach ($wisatas as $w)
-                                <div class="col-lg-6">
-                                    <div class="item">
-                                        <div class="row">
-                                            <div class="col-lg-4 col-sm-5">
-                                                <div class="image">
-                                                    @if ($w->gambar_w && Storage::disk('public')->exists($w->gambar_w))
-                                            <img src="{{ asset('storage/' . $w->gambar_w) }}" 
-                                                alt="Gambar Wisata">
-                                        @else
-                                            <img src="https://placehold.co/600x400?text=Gambar+Tidak+Tersedia"
-                                                 alt="Gambar Tidak Tersedia">
-                                        @endif
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-8 col-sm-7">
-                                                <div class="right-content">
-                                                    <h4>{{ $w->nama_w }}</h4>
-                                                    <span>{{ $w->kategoriWisata->nama_ktg }}</span>
-                                                    {{-- <div class="main-button">
-                                                        <a href="about.html">Detail</a>
-                                                    </div> --}}
-                                                    <p> {{ $w->desk_w ?? '-' }}
-                                                    </p>
-                                                  
-                                                        <p><i class="fa fa-user"></i> {{ $w->penilaian->count()}} </p>
-                                                    <div class="text-button">
-                                                        <a href="about.html">Lihat Detail <i
-                                                                class="fa fa-arrow-right"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-
-
-                        </div>
-                    </div>
-                </div>
-                {{-- <div class="col-lg-4">
-                    <div class="side-bar-map">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div id="map">
-                                    <iframe
-                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12469.776493332698!2d-80.14036379941481!3d25.907788681148624!2m3!1f357.26927939317244!2f20.870722720054623!3f0!3m2!1i1024!2i768!4f35!3m3!1m2!1s0x88d9add4b4ac788f%3A0xe77469d09480fcdb!2sSunny%20Isles%20Beach!5e1!3m2!1sen!2sth!4v1642869952544!5m2!1sen!2sth"
-                                        width="100%" height="550px" frameborder="0"
-                                        style="border:0; border-radius: 23px; " allowfullscreen=""></iframe>
-                                </div>
                             </div>
                         </div>
                     </div>
-                </div> --}}
+                </div>
+                <!-- /Login Card -->
             </div>
         </div>
     </div>
 
-   <div class="call-to-action">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-8">
-                <h2>Siap Menjelajahi Wisata Kota Sorong?</h2>
-                <h4>Temukan destinasi terbaik dan rencanakan perjalanan wisatamu sekarang</h4>
-            </div>
-            <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
-                <div class="border-button">
-                    <a href="#wisata">Lihat Destinasi Wisata</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-@endsection
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Script untuk toggle password -->
+    <script>
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordField = document.getElementById('password');
+            const icon = this.querySelector('i');
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                icon.classList.remove('bx-hide');
+                icon.classList.add('bx-show');
+            } else {
+                passwordField.type = 'password';
+                icon.classList.remove('bx-show');
+                icon.classList.add('bx-hide');
+            }
+        });
+    </script>
+</body>
+</html>

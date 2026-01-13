@@ -15,8 +15,17 @@
                             <li><a class="" href="{{ route('tentang') }}">Tentang</a></li>
                             <li><a href="{{ route('wisata') }}">Wisata</a></li>
                             <li><a href="{{ route('rekomendasi') }}">Rekomendasi</a></li>
+
+
+                             @if (Auth::check() != null)
+                            <li>
+                                <a class="fw-bolder" href="{{ route('dashboard.home') }}">Welcome {{ Auth::user()->email }}</a>
+                            </li>
+                        @else
                             <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="#">Daftar</a></li>
+                            <li><a href="{{ route('daftar') }}">Daftar Akun</a></li>
+                        @endif
+                          
                         </ul>
                         <a class='menu-trigger'>
                             <span>Menu</span>

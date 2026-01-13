@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Aplikasi Pemilihan Tempat Wisata Kota Sorong</title>
-      <!-- Bootstrap core CSS -->
+    <title>Daftar Akun - Aplikasi Pemilihan Tempat Wisata Kota Sorong</title>
+   <!-- Bootstrap core CSS -->
     <link href="{{ asset('visitor/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Boxicons -->
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
@@ -25,7 +25,7 @@
         }
         .authentication-wrapper {
             width: 100%;
-            max-width: 450px;
+            max-width: 700px;
             padding: 20px;
         }
         .card {
@@ -44,7 +44,7 @@
             margin-bottom: 30px;
         }
         .logo-section img {
-            width: 80px;
+            width: 200px;
             height: auto;
             margin-bottom: 15px;
             filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
@@ -137,7 +137,6 @@
     <link href="assets/css/main.css?v=6.1" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    @include('sweetalert::alert')
     <div class="container-xxl mx-auto">
         <div class="authentication-wrapper authentication-basic mx-auto">
             <div class="authentication-inner">
@@ -147,15 +146,35 @@
                         <!-- Logo Section -->
                         <div class="logo-section">
                             <img width="80px" class="p-3" src="{{ asset('assets/img/logo.png') }}" alt="Logo Aplikasi" srcset="">
-                            <h3 class="fw-bold">Aplikasi Pemilihan <br> Tempat Wisata <br> Kota Sorong</h3>
+                            <h3 class="fw-bold">Daftar Akun </h3>
                         </div>
                         <!-- /Logo Section -->
-                        <p class="welcome-text">Silakan masuk ke akun Anda untuk mengakses Sistem ini sekarang juga</p>
-
-                        <form id="formAuthentication" class="mb-3" method="POST" action="{{ route('login') }}">
+                        <p class="welcome-text">Silakan Isi Data Anda Dengan Benar</p>
+                        
+                        <form id="formAuthentication" class="mb-3" method="POST" action="{{ route('daftarstore') }}">
                             @csrf
+
+                              <div class="mb-3">
+                                <label for="nama" class="form-label">Nama <span class="text-danger">*</span> </label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="nama"
+                                    name="nama"
+                                    placeholder="Masukkan nama"
+                                    autofocus
+                                    
+                                />
+                                @error('nama')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+
                             <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
+                                <label for="email" class="form-label">Email <span class="text-danger">*</span> </label>
                                 <input
                                     type="email"
                                     class="form-control"
@@ -163,7 +182,7 @@
                                     name="email"
                                     placeholder="Masukkan email"
                                     autofocus
-                                    required
+                                    
                                 />
                                 @error('email')
                                     <div class="text-danger">
@@ -171,9 +190,60 @@
                                     </div>
                                 @enderror
                             </div>
+
+                                <div class="mb-3">
+                                <label for="tempat_lahir" class="form-label">Tempat Lahir <span class="text-danger">*</span> </label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="tempat_lahir"
+                                    name="tempat_lahir"
+                                    placeholder="Masukkan tempat lahir"
+                                    autofocus
+                                    
+                                />
+                                @error('tempat_lahir')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                             <div class="mb-3">
+                                <label for="tanggal_lahir" class="form-label">Tanggal Lahir <span class="text-danger">*</span> </label>
+                                <input
+                                    type="date"
+                                    class="form-control"
+                                    id="tanggal_lahir"
+                                    name="tanggal_lahir"
+                                    placeholder="Masukkan tanggal lahir"
+                                    autofocus
+                                    
+                                />
+                                @error('tanggal_lahir')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                             <div class="mb-3">
+                                <label for="alamat" class="form-label">Alamat <span class="text-danger">*</span> </label>
+                                     <textarea class="form-control" id="alamat" name ="alamat" rows="3"></textarea>
+                                @error('alamat')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+
+
+
+
                             <div class="mb-3 form-password-toggle">
                                 <div class="d-flex justify-content-between">
-                                    <label class="form-label" for="password">Password</label>
+                                    <label class="form-label" for="password">Password <span class="text-danger">*</span> </label>
                                 </div>
                                 <div class="input-group input-group-merge">
                                     <input
@@ -183,7 +253,7 @@
                                         name="password"
                                         placeholder="Masukkan password"
                                         aria-describedby="password"
-                                        required
+                                        
                                     />
                                     <span class="input-group-text cursor-pointer" id="togglePassword">
                                         <i class="bx bx-hide"></i>
@@ -195,16 +265,44 @@
                                     </div>
                                 @enderror
                             </div>
+
+
+                              <div class="mb-3 form-password-toggle">
+                                <div class="d-flex justify-content-between">
+                                    <label class="form-label" for="password_confirmation">Konfirmasi Password <span class="text-danger">*</span> </label>
+                                </div>
+                                <div class="input-group input-group-merge">
+                                    <input
+                                        type="password"
+                                        id="password_confirmation"
+                                        class="form-control"
+                                        name="password_confirmation"
+                                        placeholder="Masukkan ulang password"
+                                        aria-describedby="password_confirmation"
+                                        
+                                    />
+                                    <span class="input-group-text cursor-pointer" id="togglePassword">
+                                        <i class="bx bx-hide"></i>
+                                    </span>
+                                </div>
+                                @error('password_confirmation')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <input type="text" name="role" value="{{ $id }}" hidden>
                             <div class="mb-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember-me" {{ old('remember') ? 'checked' : '' }} />
-                                    <label class="form-check-label" for="remember-me"> Ingat Saya </label>
+                                <div class="">
+                                   Sudah punya akun ? <a href="{{ route('login') }}">Login</a>
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <button class="btn btn-primary d-grid w-100" type="submit">Masuk</button>
+                                <button class="btn btn-primary d-grid w-100" type="submit">Daftar</button>
                             </div>
                         </form>
+                        </div>
                     </div>
                 </div>
                 <!-- /Login Card -->
