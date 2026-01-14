@@ -8,7 +8,7 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/tentang', [App\Http\Controllers\HomeController::class, 'tentang'])->name('tentang');
-Route::get('/wisata', [App\Http\Controllers\HomeController::class, 'wisata'])->name('wisata');
+Route::get('/tempat-wisata', [App\Http\Controllers\HomeController::class, 'wisata'])->name('wisata');
 Route::get('/detail/{id}', [App\Http\Controllers\HomeController::class, 'detail'])->name('detail');
 Route::get('/rekomendasi', [App\Http\Controllers\HomeController::class, 'rekomendasi'])->name('rekomendasi');
 Route::get('/daftar', [App\Http\Controllers\HomeController::class, 'daftar'])->name('daftar');
