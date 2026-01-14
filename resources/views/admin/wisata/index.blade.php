@@ -9,21 +9,23 @@
 
                 <div class="card">
                     <h5 class="card-header text-capitalize"> <i class="menu-icon tf-icons bx bx-map-alt"></i> Data Wisata</h5>
-                    <div class="table-responsive text-nowrap p-3">
-                        <div class="row">
 
-                            <div class="col-6 my-3">
+
+                     <div class="table-responsive text-nowrap p-5">
+                        <div class="row g-2 mb-3 align-items-center">
+                            <div class="col-md-6 col-12">
                                 @if (Auth::user()->hasAnyRole(['usaha']))
                                 <a class="btn btn-primary" href="{{ route('dashboard.wisata.tambah') }}">Tambah Data Wisata<i
                                         class="bx bx-plus me-1"></i></a>
                                     @endif
                             </div>
-                            <div class="col-6 my-3">
+                            <div class="col-md-6 col-12">
                                 @include('admin.layout.search')
                             </div>
-
                         </div>
-                    </div>
+
+
+                  
                     <table class="table table-bordered">
                         <thead class="">
                             <tr class="bg-primary ">
@@ -50,7 +52,7 @@
                                     <td>
                                           @if ($data->gambar_w && Storage::disk('public')->exists($data->gambar_w))
                                                         {{-- GAMBAR DARI STORAGE --}}
-                                                        <img width="150" src="{{ asset('storage/' . $data->gambar_w) }}"
+                                                    <img width="150" src="{{ asset('storage/' . $data->gambar_w) }}"
                                                             alt="Gambar Wisata">
                                                     @elseif ($data->gambar_w && file_exists(public_path($data->gambar_w)))
                                                         {{-- GAMBAR DARI ASSET BIASA --}}
@@ -108,6 +110,8 @@
 
                         </tbody>
                     </table>
+
+                     </div>
                     <div class=" mt-3">
                         {{ $datas->links() }}
                     </div>

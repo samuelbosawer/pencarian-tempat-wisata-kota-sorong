@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Aplikasi Pemilihan Tempat Wisata Kota Sorong</title>
-      <!-- Bootstrap core CSS -->
+    <!-- Bootstrap core CSS -->
     <link href="{{ asset('visitor/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Boxicons -->
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
@@ -23,11 +24,13 @@
             justify-content: center;
             margin: 0;
         }
+
         .authentication-wrapper {
             width: 100%;
             max-width: 600px;
             padding: 20px;
         }
+
         .card {
             border: none;
             border-radius: 20px;
@@ -36,19 +39,23 @@
             background: rgba(255, 255, 255, 0.95);
             overflow: hidden;
         }
+
         .card-body {
             padding: 40px;
         }
+
         .logo-section {
             text-align: center;
             margin-bottom: 30px;
         }
+
         .logo-section img {
             width: 80px;
             height: auto;
             margin-bottom: 15px;
             filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
         }
+
         .logo-section h3 {
             color: #333;
             font-weight: 700;
@@ -56,6 +63,7 @@
             line-height: 1.3;
             margin: 0;
         }
+
         .welcome-text {
             text-align: center;
             color: #666;
@@ -63,11 +71,13 @@
             margin-bottom: 30px;
             line-height: 1.5;
         }
+
         .form-label {
             font-weight: 500;
             color: #333;
             margin-bottom: 8px;
         }
+
         .form-control {
             border: 2px solid #e9ecef;
             border-radius: 12px;
@@ -75,10 +85,12 @@
             font-size: 0.95rem;
             transition: all 0.3s ease;
         }
+
         .form-control:focus {
             border-color: #2596be;
             box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
         }
+
         .input-group-text {
             border: 2px solid #e9ecef;
             border-left: none;
@@ -87,13 +99,16 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
+
         .input-group-text:hover {
             background: #f8f9fa;
         }
+
         .form-check-input:checked {
             background-color: #2596be;
             border-color: #2596be;
         }
+
         .btn-primary {
             background: linear-gradient(135deg, #2596be 0%, #0f4d64 100%);
             border: none;
@@ -104,28 +119,35 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
+
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
         }
+
         .text-danger {
             font-size: 0.85rem;
             margin-top: 5px;
         }
+
         .form-password-toggle {
             position: relative;
         }
+
         .input-group {
             position: relative;
         }
+
         .input-group input {
             border-right: none;
             border-radius: 12px 0 0 12px;
         }
+
         @media (max-width: 576px) {
             .card-body {
                 padding: 30px 20px;
             }
+
             .logo-section h3 {
                 font-size: 1.3rem;
             }
@@ -136,6 +158,7 @@
     <script src="assets/js/vendors/color-modes.js"></script>
     <link href="assets/css/main.css?v=6.1" rel="stylesheet" type="text/css" />
 </head>
+
 <body>
     @include('sweetalert::alert')
     <div class="container-xxl mx-auto">
@@ -146,7 +169,8 @@
                     <div class="card-body">
                         <!-- Logo Section -->
                         <div class="logo-section">
-                            <img width="80px" class="p-3" src="{{ asset('assets/img/logo.png') }}" alt="Logo Aplikasi" srcset="">
+                            <img width="80px" class="p-3" src="{{ asset('assets/img/logo.png') }}"
+                                alt="Logo Aplikasi" srcset="">
                             <h3 class="fw-bold">Aplikasi Pemilihan <br> Tempat Wisata <br> Kota Sorong</h3>
                         </div>
                         <!-- /Logo Section -->
@@ -156,15 +180,8 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input
-                                    type="email"
-                                    class="form-control"
-                                    id="email"
-                                    name="email"
-                                    placeholder="Masukkan email"
-                                    autofocus
-                                    required
-                                />
+                                <input type="email" class="form-control" id="email" name="email"
+                                    placeholder="Masukkan email" autofocus required />
                                 @error('email')
                                     <div class="text-danger">
                                         {{ $message }}
@@ -176,15 +193,8 @@
                                     <label class="form-label" for="password">Password</label>
                                 </div>
                                 <div class="input-group input-group-merge">
-                                    <input
-                                        type="password"
-                                        id="password"
-                                        class="form-control"
-                                        name="password"
-                                        placeholder="Masukkan password"
-                                        aria-describedby="password"
-                                        required
-                                    />
+                                    <input type="password" id="password" class="form-control" name="password"
+                                        placeholder="Masukkan password" aria-describedby="password" required />
                                     <span class="input-group-text cursor-pointer" id="togglePassword">
                                         <i class="bx bx-hide"></i>
                                     </span>
@@ -195,15 +205,25 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="mb-3 d-flex justify-content-between">
+                            <div
+                                class="mb-3 d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2">
 
                                 <div>
-                                    Belum punya akun ? <a href="{{ route('daftar') }}" class="text-decoration-none fw-bolder"> Daftar</a>
+                                    Belum punya akun?
+                                    <a href="{{ route('daftar') }}" class="text-decoration-none fw-bold">
+                                        Daftar
+                                    </a>
                                 </div>
+
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember-me" {{ old('remember') ? 'checked' : '' }} />
-                                    <label class="form-check-label" for="remember-me"> Ingat Saya </label>
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember-me"
+                                        {{ old('remember') ? 'checked' : '' }}>
+
+                                    <label class="form-check-label" for="remember-me">
+                                        Ingat Saya
+                                    </label>
                                 </div>
+
                             </div>
                             <div class="mb-3">
                                 <button class="btn btn-primary d-grid w-100" type="submit">Masuk</button>
@@ -235,4 +255,5 @@
         });
     </script>
 </body>
+
 </html>

@@ -10,17 +10,19 @@
                 <div class="card">
                     <h5 class="card-header text-capitalize"> <i class="menu-icon tf-icons bx bx-message"></i> Data Penilaian
                     </h5>
-                    <div class="table-responsive text-nowrap p-3">
+                    <div class="table-responsive text-nowrap p-5">
                         <div class="row">
-                            {{-- <div class="col-6 my-3">
-                      <a class="btn btn-primary" href="{{ route('dashboard.skala.tambah') }}">Tambah Data Penilaian<i class="bx bx-plus me-1"></i></a>
-                    </div> --}}
-                            <div class="col-6 my-3">
+                           <div class="row g-2 mb-3 align-items-center">
+                            <div class="col-md-6 col-12">
+                               
+                            </div>
+                            <div class="col-md-6 col-12">
                                 @include('admin.layout.search')
                             </div>
+                        </div>
+
 
                         </div>
-                    </div>
                     <table class="table table-bordered">
                         <thead class="">
                             <tr class="bg-primary ">
@@ -54,17 +56,17 @@
 
                                                 {{-- <a class="dropdown-item" href="{{ route('dashboard.penilaian.ubah', $data->id )}}"><i class="bx bx-edit-alt me-1"></i> Ubah</a
                               > --}} @if (!Auth::user()->hasRole('usaha'))
-                                                <form action="{{ route('dashboard.penilaian.hapus', $data->id) }}"
-                                                    method="POST"
-                                                    onsubmit="return confirm('Yakin ingin menghapus data ini?');">
-                                                    @csrf
-                                                    @method('DELETE')
+                                                    <form action="{{ route('dashboard.penilaian.hapus', $data->id) }}"
+                                                        method="POST"
+                                                        onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                                                        @csrf
+                                                        @method('DELETE')
 
-                                                    <button type="submit" class="dropdown-item text-danger">
-                                                        <i class="bx bx-trash me-1"></i> Hapus
-                                                    </button>
-                                                </form>
-                                            @endif
+                                                        <button type="submit" class="dropdown-item text-danger">
+                                                            <i class="bx bx-trash me-1"></i> Hapus
+                                                        </button>
+                                                    </form>
+                                                @endif
 
 
                                             </div>
@@ -83,6 +85,9 @@
 
                         </tbody>
                     </table>
+
+                    </div>
+
                     <div class=" mt-3">
                         {{ $datas->links() }}
                     </div>
