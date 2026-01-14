@@ -11,6 +11,9 @@
 
     <title>Wisata Kota Sorong</title>
 
+    <!-- Paksa Light Mode -->
+    <meta name="color-scheme" content="only light">
+    <meta name="theme-color" content="#ffffff">
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('visitor/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
@@ -23,7 +26,14 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/logo.png') }}" />
-
+    <style>
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
