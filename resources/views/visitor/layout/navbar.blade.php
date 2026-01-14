@@ -11,27 +11,45 @@
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
 
-                    
-                    <ul class="nav">
-                        <li><a href="{{ route('home') }}">Beranda</a></li>
-                        <li><a class="" href="{{ route('tentang') }}">Tentang</a></li>
-                        <li><a href="{{ route('wisata') }}">Wisata</a></li>
-                        <li><a href="{{ route('rekomendasi') }}">Rekomendasi</a></li>
 
+                    <ul class="nav">
+                        <li>
+                            <a class="{{ Route::is('home') ? 'active' : '' }}" href="{{ route('home') }}">
+                                Beranda
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="{{ Route::is('tentang') ? 'active' : '' }}" href="{{ route('tentang') }}">
+                                Tentang
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="{{ Route::is('wisata') ? 'active' : '' }}" href="{{ route('wisata') }}">
+                                Wisata
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="{{ Route::is('rekomendasi') ? 'active' : '' }}" href="{{ route('rekomendasi') }}">
+                                Rekomendasi
+                            </a>
+                        </li>
 
                         @if (Auth::check() != null)
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle fw-bolder" href="#" id="userDropdown"
                                     role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                   <i class="fa fa-user"></i>
+                                    <i class="fa fa-user"></i>
                                 </a>
 
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                     <li>
-                                            <a class="text-dark" href="{{ route('dashboard.home') }}">
-                                                 Welcome {{ Auth::user()->email }}
-                                            </a>
-                                        </li>
+                                    <li>
+                                        <a class="text-dark" href="{{ route('dashboard.home') }}">
+                                            Welcome {{ Auth::user()->email }}
+                                        </a>
+                                    </li>
                                     @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('usaha'))
                                         <li>
                                             <a class="text-dark" href="{{ route('dashboard.home') }}">
