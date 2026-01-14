@@ -15,7 +15,9 @@
                 <div class="table-responsive text-nowrap p-3">
                   <div class="row">
                     <div class="col-6 my-3">
+                         @if (!Auth::user()->hasAnyRole(['admin', 'usaha','pengunjung']))
                       <a class="btn btn-primary" href="{{ route('dashboard.user.tambah') }}">Tambah Data User <i class="bx bx-plus me-1"></i></a>
+                      @endif
                     </div>
                     <div class="col-6 my-3">
                       @include('admin.layout.search')
@@ -50,6 +52,9 @@
                                 >
                                 <i class="bx bx-box me-1"></i> Detail</a
                               >
+
+
+                              @if (!Auth::user()->hasAnyRole(['admin', 'usaha','pengunjung']))
                               <a class="dropdown-item" href="{{ route('dashboard.user.ubah', $data->id )}}"><i class="bx bx-edit-alt me-1"></i> Ubah</a
                               >
 
@@ -63,6 +68,7 @@
                                       <i class="bx bx-trash me-1"></i> Hapus
                                   </button>
                               </form>
+                              @endif
                             </div>
                           </div>
                           

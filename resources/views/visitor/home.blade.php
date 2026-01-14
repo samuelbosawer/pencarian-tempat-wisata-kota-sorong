@@ -209,12 +209,17 @@
                                             <div class="col-lg-4 col-sm-5">
                                                 <div class="image">
                                                     @if ($w->gambar_w && Storage::disk('public')->exists($w->gambar_w))
-                                            <img src="{{ asset('storage/' . $w->gambar_w) }}" 
-                                                alt="Gambar Wisata">
-                                        @else
-                                            <img src="https://placehold.co/600x400?text=Gambar+Tidak+Tersedia"
-                                                 alt="Gambar Tidak Tersedia">
-                                        @endif
+                                                        {{-- GAMBAR DARI STORAGE --}}
+                                                        <img src="{{ asset('storage/' . $w->gambar_w) }}"
+                                                            alt="Gambar Wisata">
+                                                    @elseif ($w->gambar_w && file_exists(public_path($w->gambar_w)))
+                                                        {{-- GAMBAR DARI ASSET BIASA --}}
+                                                        <img src="{{ asset($w->gambar_w) }}" alt="Gambar Wisata">
+                                                    @else
+                                                        {{-- PLACEHOLDER --}}
+                                                        <img src="https://placehold.co/600x400?text=Gambar+Tidak+Tersedia"
+                                                            alt="Gambar Tidak Tersedia">
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="col-lg-8 col-sm-7">

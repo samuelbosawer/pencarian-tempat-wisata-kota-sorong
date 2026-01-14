@@ -16,7 +16,7 @@
     <!-- Scripts -->
     <!-- Bootstrap core JavaScript -->
     <script src="{{ asset('visitor/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('visitor/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('/assets/vendor/js/bootstrap.js') }}"></script>
 
     <!-- Additional JS Files -->
     <script src="{{ asset('visitor/assets/js/isotope.min.js') }}"></script>

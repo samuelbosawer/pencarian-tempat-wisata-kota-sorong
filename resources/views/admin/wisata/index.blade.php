@@ -11,9 +11,12 @@
                     <h5 class="card-header text-capitalize"> <i class="menu-icon tf-icons bx bx-map-alt"></i> Data Wisata</h5>
                     <div class="table-responsive text-nowrap p-3">
                         <div class="row">
+
                             <div class="col-6 my-3">
+                                @if (Auth::user()->hasAnyRole(['usaha']))
                                 <a class="btn btn-primary" href="{{ route('dashboard.wisata.tambah') }}">Tambah Data Wisata<i
                                         class="bx bx-plus me-1"></i></a>
+                                    @endif
                             </div>
                             <div class="col-6 my-3">
                                 @include('admin.layout.search')
@@ -45,13 +48,19 @@
                                        
 
                                     <td>
-                                        @if ($data->gambar_w && Storage::disk('public')->exists($data->gambar_w))
-                                            <img src="{{ asset('storage/' . $data->gambar_w) }}" width="150"
-                                                alt="Gambar Wisata">
-                                        @else
-                                            <img src="https://placehold.co/600x400?text=Gambar+Tidak+Tersedia"
-                                                width="150" alt="Gambar Tidak Tersedia">
-                                        @endif
+                                          @if ($data->gambar_w && Storage::disk('public')->exists($data->gambar_w))
+                                                        {{-- GAMBAR DARI STORAGE --}}
+                                                        <img width="150" src="{{ asset('storage/' . $data->gambar_w) }}"
+                                                            alt="Gambar Wisata">
+                                                    @elseif ($data->gambar_w && file_exists(public_path($data->gambar_w)))
+                                                        {{-- GAMBAR DARI ASSET BIASA --}}
+                                                        <img width="150" src="{{ asset($data->gambar_w) }}"
+                                                            alt="Gambar Wisata">
+                                                    @else
+                                                        {{-- PLACEHOLDER --}}
+                                                        <img width="150" src="https://placehold.co/600x400?text=Gambar+Tidak+Tersedia"
+                                                            alt="Gambar Tidak Tersedia">
+                                                    @endif
                                     </td>
 
                                     <td>{{ $data->user->nama ?? '-' }}</td>
@@ -65,6 +74,8 @@
                                                 <a class="dropdown-item"
                                                     href="{{ route('dashboard.wisata.detail', $data->id) }}">
                                                     <i class="bx bx-box me-1"></i> Detail</a>
+
+                                                        @if (Auth::user()->hasAnyRole(['usaha']))
                                                 <a class="dropdown-item"
                                                     href="{{ route('dashboard.wisata.ubah', $data->id) }}"><i
                                                         class="bx bx-edit-alt me-1"></i> Ubah</a>
@@ -79,6 +90,8 @@
                                                         <i class="bx bx-trash me-1"></i> Hapus
                                                     </button>
                                                 </form>
+
+                                                @endif
                                             </div>
                                         </div>
 

@@ -44,10 +44,15 @@
                                     {{-- Preview gambar --}}
                                     <div class="mb-2">
                                         <img id="preview-gambar"
-                                            src="{{ isset($data) && $data->gambar_w
-                                                ? asset('storage/' . $data->gambar_w)
-                                                : 'https://placehold.co/600x400?text=Gambar+Belum+Tersedia' }}"
+                                            src="
+        @if (isset($data) && $data->gambar_w && Storage::disk('public')->exists($data->gambar_w)) {{ asset('storage/' . $data->gambar_w) }}
+        @elseif(isset($data) && $data->gambar_w && file_exists(public_path($data->gambar_w)))
+            {{ asset($data->gambar_w) }}
+        @else
+            https://placehold.co/600x400?text=Gambar+Belum+Tersedia @endif
+     "
                                             alt="Preview Gambar" class="img-thumbnail" style="max-width: 300px;">
+
                                     </div>
 
                                     {{-- Input file --}}
@@ -121,15 +126,17 @@
                             </div>
                             <div class="col-md-12 mb-3 mx-auto">
 
-
-                                @if (Request::segment(3) == 'detail')
-                                    <a href="{{ route('dashboard.wisata.ubah', $data->id) }}"
-                                        class="btn btn-dark text-white"> <i class="menu-icon tf-icons bx bx-pencil"></i>
-                                        UBAH DATA </a>
-                                @elseif ((Request::segment(3) == 'tambah' || Request::segment(4) == 'ubah') && Request::segment(2) == 'wisata')
-                                    <button type="submit" class="btn btn-primary text-white">SIMPAN <i
-                                            class="menu-icon tf-icons bx bx-save"></i></button>
+                                @if (Auth::user()->hasAnyRole(['usaha']))
+                                    @if (Request::segment(3) == 'detail')
+                                        <a href="{{ route('dashboard.wisata.ubah', $data->id) }}"
+                                            class="btn btn-dark text-white"> <i class="menu-icon tf-icons bx bx-pencil"></i>
+                                            UBAH DATA </a>
+                                    @elseif ((Request::segment(3) == 'tambah' || Request::segment(4) == 'ubah') && Request::segment(2) == 'wisata')
+                                        <button type="submit" class="btn btn-primary text-white">SIMPAN <i
+                                                class="menu-icon tf-icons bx bx-save"></i></button>
+                                    @endif
                                 @endif
+
 
                                 <a href="{{ route('dashboard.wisata') }}" class="btn btn-dark text-white"> KEMBALI </a>
 
@@ -144,40 +151,39 @@
             </div>
         @endsection
 
-       @push('scripts')
-<script>
-function previewGambar(input) {
-    if (input.files && input.files[0]) {
-        const file = input.files[0];
-        const reader = new FileReader();
+        @push('scripts')
+            <script>
+                function previewGambar(input) {
+                    if (input.files && input.files[0]) {
+                        const file = input.files[0];
+                        const reader = new FileReader();
 
-        reader.onload = function(e) {
-            const img = new Image();
-            img.onload = function() {
+                        reader.onload = function(e) {
+                            const img = new Image();
+                            img.onload = function() {
 
-                // Canvas resize 600x400
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
-                canvas.width = 600;
-                canvas.height = 400;
+                                // Canvas resize 600x400
+                                const canvas = document.createElement('canvas');
+                                const ctx = canvas.getContext('2d');
+                                canvas.width = 600;
+                                canvas.height = 400;
 
-                ctx.drawImage(img, 0, 0, 600, 400);
+                                ctx.drawImage(img, 0, 0, 600, 400);
 
-                // Convert ke base64
-                const base64Image = canvas.toDataURL('image/jpeg', 0.9);
+                                // Convert ke base64
+                                const base64Image = canvas.toDataURL('image/jpeg', 0.9);
 
-                // Preview
-                document.getElementById('preview-gambar').src = base64Image;
+                                // Preview
+                                document.getElementById('preview-gambar').src = base64Image;
 
-                // Simpan ke hidden input
-                document.getElementById('gambarBase64').value = base64Image;
-            };
-            img.src = e.target.result;
-        };
+                                // Simpan ke hidden input
+                                document.getElementById('gambarBase64').value = base64Image;
+                            };
+                            img.src = e.target.result;
+                        };
 
-        reader.readAsDataURL(file);
-    }
-}
-</script>
-@endpush
-
+                        reader.readAsDataURL(file);
+                    }
+                }
+            </script>
+        @endpush

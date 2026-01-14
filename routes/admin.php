@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth','role.custom:admin|usaha']], function () {
     Route::prefix('dashboard')->name('dashboard.')->group(function () {
 
         // Dashboard

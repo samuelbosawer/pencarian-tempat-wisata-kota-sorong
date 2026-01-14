@@ -7,6 +7,7 @@ use App\Models\KategoriWisata;
 use App\Models\Wisata;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -17,24 +18,28 @@ class TempatWisataController extends Controller
     {
         $datas = Wisata::with(['user', 'kategoriWisata'])
             ->whereNotNull('nama_w')
+
+            // 🔐 FILTER JIKA ROLE = USAHA
+            ->when(Auth::user()->hasRole('usaha'), function ($query) {
+                $query->where('user_id', Auth::user()->id);
+            })
+
+            // 🔍 SEARCH
             ->when($request->s, function ($query) use ($request) {
                 $s = $request->s;
 
                 $query->where(function ($q) use ($s) {
                     $q->where('nama_w', 'LIKE', "%{$s}%")
                         ->orWhere('desk_w', 'LIKE', "%{$s}%")
-                        ->orWhereHas(
-                            'user',
-                            fn($u) =>
-                            $u->where('nama', 'LIKE', "%{$s}%")
-                        )
-                        ->orWhereHas(
-                            'kategoriWisata',
-                            fn($k) =>
-                            $k->where('nama_ktg', 'LIKE', "%{$s}%")
-                        );
+                        ->orWhereHas('user', function ($u) use ($s) {
+                            $u->where('nama', 'LIKE', "%{$s}%");
+                        })
+                        ->orWhereHas('kategoriWisata', function ($k) use ($s) {
+                            $k->where('nama_ktg', 'LIKE', "%{$s}%");
+                        });
                 });
             })
+
             ->orderBy('id', 'desc')
             ->paginate(7);
 
@@ -47,10 +52,20 @@ class TempatWisataController extends Controller
     public function create()
     {
         $kategoris = KategoriWisata::orderBy('id', 'desc')->get();
+
         $users = User::whereDoesntHave('roles', function ($q) {
             $q->where('name', 'admin')
                 ->orWhere('name', 'pengunjung');
-        })->orderBy('id', 'asc')->get();
+        })
+
+            // 🔐 JIKA LOGIN SEBAGAI USAHA → HANYA DIRI SENDIRI
+            ->when(Auth::user()->hasRole('usaha'), function ($query) {
+                $query->where('id', Auth::user()->id);
+            })
+
+            ->orderBy('id', 'asc')
+            ->get();
+
         return view('admin.wisata.create-update-show', compact('kategoris', 'users'));
     }
 
@@ -102,7 +117,15 @@ class TempatWisataController extends Controller
         $users = User::whereDoesntHave('roles', function ($q) {
             $q->where('name', 'admin')
                 ->orWhere('name', 'pengunjung');
-        })->orderBy('id', 'asc')->get();
+        })
+
+            // 🔐 JIKA LOGIN SEBAGAI USAHA → HANYA DIRI SENDIRI
+            ->when(Auth::user()->hasRole('usaha'), function ($query) {
+                $query->where('id', Auth::user()->id);
+            })
+
+            ->orderBy('id', 'asc')
+            ->get();
         $data = Wisata::where('id', $id)->first();
         $judul = 'Detail Data Tempat Wisata';
         return view('admin.wisata.create-update-show', compact('kategoris', 'users', 'data', 'judul'));
@@ -112,10 +135,18 @@ class TempatWisataController extends Controller
     public function edit($id)
     {
         $kategoris = KategoriWisata::orderBy('id', 'desc')->get();
-        $users = User::whereDoesntHave('roles', function ($q) {
+       $users = User::whereDoesntHave('roles', function ($q) {
             $q->where('name', 'admin')
                 ->orWhere('name', 'pengunjung');
-        })->orderBy('id', 'asc')->get();
+        })
+
+            // 🔐 JIKA LOGIN SEBAGAI USAHA → HANYA DIRI SENDIRI
+            ->when(Auth::user()->hasRole('usaha'), function ($query) {
+                $query->where('id', Auth::user()->id);
+            })
+
+            ->orderBy('id', 'asc')
+            ->get();
         $data = Wisata::where('id', $id)->first();
         $judul = 'Detail Data Tempat Wisata';
         return view('admin.wisata.create-update-show', compact('kategoris', 'users', 'data', 'judul'));

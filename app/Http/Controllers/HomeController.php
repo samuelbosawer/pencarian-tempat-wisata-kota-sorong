@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetailPenilaian;
 use App\Models\Kriteria;
 use App\Models\Penilaian;
+use App\Models\SkalaPenilaian;
 use App\Models\User;
 use App\Models\Wisata;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class HomeController extends Controller
@@ -44,7 +47,14 @@ class HomeController extends Controller
         return view('visitor.wisata', compact('wisatas'));
     }
 
-    public function detail($id) {}
+    public function detail($id) {
+
+        $data = Wisata::where('id', $id)->first();
+        $penilaian = Penilaian::with('detailPenilaian')->where('wisata_id', $data->id)->orderBy('id', 'desc')->get();
+        $kriteria = Kriteria::orderBy('id', 'desc')->get();
+        $skala = SkalaPenilaian::orderBy('id', 'desc')->get();
+        return view('visitor.detail', compact('data','penilaian','kriteria','skala'));
+    }
 
     public function rekomendasi()
     {
@@ -213,5 +223,35 @@ class HomeController extends Controller
      
     }
 
-    public function review(Request $request) {}
+    public function profile()
+    {
+        return view('visitor.profile');
+    }
+
+    public function review(Request $request) {
+  
+        $penilaian = Penilaian::create([
+            'user_id' => Auth::user()->id,
+            'saran_p' => $request->saran_p,
+            'wisata_id' =>  $request->wisata_id,
+        ]);
+          $detail = DetailPenilaian::create([
+            'penilaian_id' => $penilaian->id,
+            'kriteria_id' => $request->kriteria_id,
+            'skala_penilaian_id' =>  $request->skala_penilaian_id,
+        ]);
+
+        Alert::success('Berhasil', 'Data penilaian berhasil ditambahkan');
+        return redirect()->route('detail',$request->wisata_id);
+    }
+
+    public function hapusreview($id)
+    {
+        $penilaian = Penilaian::findOrFail($id);
+        $wisata_id = $penilaian->wisata_id;
+        $penilaian->delete();
+
+        Alert::success('Berhasil', 'Data penilaian berhasil dihapus');
+         return redirect()->route('detail',$wisata_id);
+    }
 }

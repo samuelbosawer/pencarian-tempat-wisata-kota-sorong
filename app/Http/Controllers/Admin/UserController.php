@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -15,6 +16,12 @@ class UserController extends Controller
     // Tampilkan semua data
     public function index(Request $request)
     {
+        if(FacadesAuth::user()->hasRole('usaha'))
+        {
+           return redirect()->route('dashboard.user.detail',FacadesAuth::user()->id);
+        }
+
+
         $datas = User::whereNotNull('nama')
             ->when($request->s, function ($query) use ($request) {
                 $s = $request->s;
@@ -38,6 +45,10 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::where('name', '!=', 'admin')->get();
+        if(FacadesAuth::user()->hasRole('usaha'))
+        {
+           return redirect()->route('dashboard.user.ubah',FacadesAuth::user()->id);
+        }
         return view('admin.user.create-update-show', compact('roles'));
     }
 
@@ -96,6 +107,10 @@ class UserController extends Controller
         $roles = Role::where('name', '!=', 'admin')->get();
         $judul = 'Detail Data User';
         $data = User::where('id', $id)->first();
+         if(FacadesAuth::user()->hasRole('usaha'))
+        {
+           $data = User::where('id', FacadesAuth::user()->id)->first();
+        }
         return view('admin.user.create-update-show', compact('roles', 'judul', 'data'));
     }
 
@@ -105,6 +120,10 @@ class UserController extends Controller
         $roles = Role::where('name', '!=', 'admin')->get();
         $judul = 'Ubah Data User';
         $data = User::where('id', $id)->first();
+          if(FacadesAuth::user()->hasRole('usaha'))
+        {
+           $data = User::where('id', FacadesAuth::user()->id)->first();
+        }
         return view('admin.user.create-update-show', compact('roles', 'judul', 'data'));
     }
 
@@ -112,7 +131,10 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
-
+          if(FacadesAuth::user()->hasRole('usaha'))
+        {
+           $user = User::findOrFail(FacadesAuth::user()->id);
+        }
         $validated = $request->validate(
             [
                 'nama'            => 'required|string|max:255',

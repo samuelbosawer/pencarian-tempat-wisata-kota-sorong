@@ -5,10 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\KategoriWisata;
 use Illuminate\Http\Request;
-use RealRashid\SweetAlert\Facades\Alert; 
+use RealRashid\SweetAlert\Facades\Alert;
+
 class KategoriController extends Controller
 {
-      // Tampilkan semua data
+    // Tampilkan semua data
     public function index(Request $request)
     {
         $datas = KategoriWisata::whereNotNull('nama_ktg')
@@ -48,7 +49,7 @@ class KategoriController extends Controller
             'nama_ktg'          => $validated['nama_ktg'],
         ]);
 
-       
+
         Alert::success('Berhasil', 'Data kategori wisata berhasil ditambahkan');
         return redirect()->route('dashboard.kategori');
     }
@@ -57,7 +58,7 @@ class KategoriController extends Controller
     public function show($id)
     {
         $judul = 'Detail Data Kategori Wisata';
-        $data = KategoriWisata::where('id',$id)->first();
+        $data = KategoriWisata::where('id', $id)->first();
         return view('admin.kategori.create-update-show', compact('judul', 'data'));
     }
 
@@ -65,7 +66,7 @@ class KategoriController extends Controller
     public function edit($id)
     {
         $judul = 'Ubah Data Kategori Wisata';
-        $data = KategoriWisata::where('id',$id)->first();
+        $data = KategoriWisata::where('id', $id)->first();
         return view('admin.kategori.create-update-show', compact('judul', 'data'));
     }
 
@@ -84,7 +85,7 @@ class KategoriController extends Controller
         $kategori->update([
             'nama_ktg'          => $validated['nama_ktg'],
         ]);
-      
+
         Alert::success('Berhasil', 'Data kategori wisata berhasil diperbarui');
         return redirect()->route('dashboard.kategori');
     }

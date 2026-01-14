@@ -25,7 +25,7 @@
         }
         .authentication-wrapper {
             width: 100%;
-            max-width: 450px;
+            max-width: 600px;
             padding: 20px;
         }
         .card {
@@ -195,7 +195,11 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3 d-flex justify-content-between">
+
+                                <div>
+                                    Belum punya akun ? <a href="{{ route('daftar') }}" class="text-decoration-none fw-bolder"> Daftar</a>
+                                </div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember-me" {{ old('remember') ? 'checked' : '' }} />
                                     <label class="form-check-label" for="remember-me"> Ingat Saya </label>

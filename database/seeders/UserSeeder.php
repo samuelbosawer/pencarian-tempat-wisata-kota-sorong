@@ -125,6 +125,29 @@ class UserSeeder extends Seeder
         $user->assignRole('pengunjung');
 
 
-        
+        // 9
+          $user = User::create([
+            'nama' => 'Sorong Tour',
+            'email' => 'sorongtour@gmail.com',
+            'password' =>  bcrypt('sorongtour@gmail.com'),
+
+            'alamat' => 'Pelabuhan Sorong',
+            'tanggal_lahir' => null, 
+            'tempat_lahir' => null
+        ]);
+        $user->assignRole('usaha');
+
+
+        // 10
+          $user = User::create([
+            'nama' => 'Admin Pantai Dafior',
+            'email' => 'dafior@gmail.com',
+            'password' =>  bcrypt('dafior@gmail.com'),
+
+            'alamat' => 'Pantai Dafior Sorong',
+            'tanggal_lahir' => null, 
+            'tempat_lahir' => null
+        ]);
+        $user->assignRole('usaha');
     }
 }

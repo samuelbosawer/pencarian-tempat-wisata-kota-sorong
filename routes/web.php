@@ -12,8 +12,10 @@ Route::get('/wisata', [App\Http\Controllers\HomeController::class, 'wisata'])->n
 Route::get('/detail/{id}', [App\Http\Controllers\HomeController::class, 'detail'])->name('detail');
 Route::get('/rekomendasi', [App\Http\Controllers\HomeController::class, 'rekomendasi'])->name('rekomendasi');
 Route::get('/daftar', [App\Http\Controllers\HomeController::class, 'daftar'])->name('daftar');
+Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
 Route::get('/daftar/pilih/{id}', [App\Http\Controllers\HomeController::class, 'daftarpilih'])->name('daftarpilih');
 Route::post('/daftar/store', [App\Http\Controllers\HomeController::class, 'daftarstore'])->name('daftarstore');
 Route::post('/review/store', [App\Http\Controllers\HomeController::class, 'review'])->name('review');
+Route::delete('/hapusreview/{id}', [App\Http\Controllers\HomeController::class, 'hapusreview'])->name('hapusreview');
 
 require_once 'admin.php';

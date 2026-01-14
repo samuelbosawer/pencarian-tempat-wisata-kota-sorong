@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\DetailPenilaian;
 use App\Models\Penilaian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 
@@ -14,7 +15,17 @@ class PenilaianController extends Controller
     // Tampilkan semua data
     public function index(Request $request)
     {
-         $datas = Penilaian::when($request->s, function ($query) use ($request) {
+        $datas = Penilaian::with(['user', 'wisata'])
+
+    // 🔐 JIKA LOGIN SEBAGAI USAHA → HANYA PENILAIAN WISATA MILIKNYA
+    ->when(Auth::user()->hasRole('usaha'), function ($query) {
+        $query->whereHas('wisata', function ($w) {
+            $w->where('user_id', Auth::user()->id);
+        });
+    })
+
+    // 🔍 SEARCH
+    ->when($request->s, function ($query) use ($request) {
         $s = $request->s;
 
         $query->where(function ($q) use ($s) {
@@ -22,7 +33,7 @@ class PenilaianController extends Controller
             // Cari dari saran penilaian
             $q->where('saran_p', 'LIKE', "%{$s}%")
 
-            // Cari dari user
+            // Cari dari user (pemberi penilaian)
             ->orWhereHas('user', function ($u) use ($s) {
                 $u->where('nama', 'LIKE', "%{$s}%")
                   ->orWhere('email', 'LIKE', "%{$s}%")
@@ -37,10 +48,12 @@ class PenilaianController extends Controller
 
         });
     })
+
     ->orderBy('id', 'desc')
     ->paginate(7);
-        return view('admin.penilaian.index', compact('datas'))
-            ->with('i', (request()->input('page', 1) - 1) * 7);
+
+return view('admin.penilaian.index', compact('datas'))
+    ->with('i', (request()->input('page', 1) - 1) * 7);
     }
 
 
@@ -82,6 +95,12 @@ class PenilaianController extends Controller
     // Hapus data
     public function destroy($id)
     {
+        $penilaian = Penilaian::findOrFail($id);
+        $penilaian->delete();
+         $detail = DetailPenilaian::where('penilaian_id', $id);
+        $detail->delete();
+        Alert::success('Berhasil', 'Data penilaian wisata berhasil dihapus');
+        return redirect()->route('dashboard.penilaian');
         
     }
 }

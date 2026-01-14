@@ -295,7 +295,7 @@
                             <input type="text" name="role" value="{{ $id }}" hidden>
                             <div class="mb-3">
                                 <div class="">
-                                   Sudah punya akun ? <a href="{{ route('login') }}">Login</a>
+                                   Sudah punya akun ? <a href="{{ route('login') }}" class="text-decoration-none fw-bolder">Login</a>
                                 </div>
                             </div>
                             <div class="mb-3">

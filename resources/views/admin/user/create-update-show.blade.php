@@ -105,7 +105,7 @@
                                 </div>
 
 
-
+{{-- @if (!Auth::user()->hasAnyRole(['admin', 'usaha','pengunjung'])) --}}
                                 <div class="col-md-8 mb-3">
                                     <label for="password" class="form-label">Password</label>
                                     <input type="password" class="form-control" id="password" name="password"
@@ -124,11 +124,12 @@
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
+                                {{-- @endif --}}
 
 
                             </div>
                             <div class="col-md-12 mb-3 mx-auto">
-
+{{-- @if (!Auth::user()->hasAnyRole(['admin', 'usaha','pengunjung'])) --}}
 
                                     @if (Request::segment(3) == 'detail')
                                         <a href="{{ route('dashboard.user.ubah', $data->id) }}"
@@ -138,6 +139,7 @@
                                         <button type="submit" class="btn btn-primary text-white">SIMPAN <i
                                                 class="menu-icon tf-icons bx bx-save"></i></button>
                                     @endif
+                                    {{-- @endif --}}
 
                                 <a href="{{ route('dashboard.user') }}" class="btn btn-dark text-white"> KEMBALI </a>
 

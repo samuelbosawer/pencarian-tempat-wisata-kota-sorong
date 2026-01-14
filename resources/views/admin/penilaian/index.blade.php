@@ -50,9 +50,10 @@
                                                 <a class="dropdown-item"
                                                     href="{{ route('dashboard.penilaian.detail', $data->id) }}">
                                                     <i class="bx bx-box me-1"></i> Detail</a>
-                                                {{-- <a class="dropdown-item" href="{{ route('dashboard.penilaian.ubah', $data->id )}}"><i class="bx bx-edit-alt me-1"></i> Ubah</a
-                              > --}}
 
+
+                                                {{-- <a class="dropdown-item" href="{{ route('dashboard.penilaian.ubah', $data->id )}}"><i class="bx bx-edit-alt me-1"></i> Ubah</a
+                              > --}} @if (!Auth::user()->hasRole('usaha'))
                                                 <form action="{{ route('dashboard.penilaian.hapus', $data->id) }}"
                                                     method="POST"
                                                     onsubmit="return confirm('Yakin ingin menghapus data ini?');">
@@ -63,6 +64,9 @@
                                                         <i class="bx bx-trash me-1"></i> Hapus
                                                     </button>
                                                 </form>
+                                            @endif
+
+
                                             </div>
                                         </div>
 

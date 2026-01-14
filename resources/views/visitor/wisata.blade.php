@@ -1,16 +1,14 @@
-
 @extends('visitor.layout.tamplate')
 
 @section('content')
-    
-
     <div class="visit-country">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
                     <div class="section-heading">
-                       <h2> Destinasi Wisata Kota Sorong</h2>
-                        <p>Informasi lengkap mengenai seluruh destinasi wisata di Kota Sorong yang dikelompokkan sebagai potensi wisata daerah.</p>
+                        <h2> Destinasi Wisata Kota Sorong</h2>
+                        <p>Informasi lengkap mengenai seluruh destinasi wisata di Kota Sorong yang dikelompokkan sebagai
+                            potensi wisata daerah.</p>
 
                     </div>
                 </div>
@@ -28,12 +26,19 @@
                                             <div class="col-lg-4 col-sm-5">
                                                 <div class="image">
                                                     @if ($w->gambar_w && Storage::disk('public')->exists($w->gambar_w))
-                                            <img src="{{ asset('storage/' . $w->gambar_w) }}" 
-                                                alt="Gambar Wisata">
-                                        @else
-                                            <img src="https://placehold.co/600x400?text=Gambar+Tidak+Tersedia"
-                                                 alt="Gambar Tidak Tersedia">
-                                        @endif
+                                                        {{-- GAMBAR DARI STORAGE --}}
+                                                        <img src="{{ asset('storage/' . $w->gambar_w) }}"
+                                                            alt="Gambar Wisata">
+                                                    @elseif ($w->gambar_w && file_exists(public_path($w->gambar_w)))
+                                                        {{-- GAMBAR DARI ASSET BIASA --}}
+                                                        <img src="{{ asset($w->gambar_w) }}" alt="Gambar Wisata">
+                                                    @else
+                                                        {{-- PLACEHOLDER --}}
+                                                        <img src="https://placehold.co/600x400?text=Gambar+Tidak+Tersedia"
+                                                            alt="Gambar Tidak Tersedia">
+                                                    @endif
+
+
                                                 </div>
                                             </div>
                                             <div class="col-lg-8 col-sm-7">
@@ -45,8 +50,8 @@
                                                     </div> --}}
                                                     <p> {{ $w->desk_w ?? '-' }}
                                                     </p>
-                                                  
-                                                        <p><i class="fa fa-user"></i> {{ $w->penilaian->count()}} </p>
+
+                                                    <p><i class="fa fa-user"></i> {{ $w->penilaian->count() }} </p>
                                                     <div class="text-button">
                                                         <a href="{{ route('detail', $w->id) }}">Lihat Detail <i
                                                                 class="fa fa-arrow-right"></i></a>
@@ -79,6 +84,4 @@
             </div>
         </div>
     </div>
-
-
 @endsection
