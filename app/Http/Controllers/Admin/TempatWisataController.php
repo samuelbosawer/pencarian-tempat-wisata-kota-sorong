@@ -99,7 +99,13 @@ class TempatWisataController extends Controller
 
             $fileName = 'wisata_' . time() . '.jpg';
 
-            Storage::disk('public')->put('wisata/' . $fileName, base64_decode($image));
+            $path = public_path('wisata');
+
+            if (!file_exists($path)) {
+                mkdir($path, 0755, true);
+            }
+
+            file_put_contents($path . '/' . $fileName, base64_decode($image));
 
             $validated['gambar_w'] = 'wisata/' . $fileName;
         }
@@ -135,7 +141,7 @@ class TempatWisataController extends Controller
     public function edit($id)
     {
         $kategoris = KategoriWisata::orderBy('id', 'desc')->get();
-       $users = User::whereDoesntHave('roles', function ($q) {
+        $users = User::whereDoesntHave('roles', function ($q) {
             $q->where('name', 'admin')
                 ->orWhere('name', 'pengunjung');
         })
@@ -189,7 +195,13 @@ class TempatWisataController extends Controller
 
             $fileName = 'wisata_' . time() . '.jpg';
 
-            Storage::disk('public')->put('wisata/' . $fileName, base64_decode($image));
+            $path = public_path('wisata');
+
+            if (!file_exists($path)) {
+                mkdir($path, 0755, true);
+            }
+
+            file_put_contents($path . '/' . $fileName, base64_decode($image));
 
             $validated['gambar_w'] = 'wisata/' . $fileName;
         }
