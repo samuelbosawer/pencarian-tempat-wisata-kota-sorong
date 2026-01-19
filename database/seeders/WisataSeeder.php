@@ -16,7 +16,7 @@ class WisataSeeder extends Seeder
         $data = [
             [
                 'nama_w' => 'Tanjung Kasuari Sorong',
-                'gambar_w' => 'assets\img\data\1.jpg',
+                'gambar_w' => 'assets/img/data/1.jpg',
                 'desk_w' => 'Pantai dengan pasir putih dan panorama matahari terbenam yang indah, cocok untuk rekreasi keluarga dan wisata alam.',
                 'user_id' => 2,
                 'kategori_wisata_id' => 1, // Wisata Alam
@@ -24,7 +24,7 @@ class WisataSeeder extends Seeder
 
             [
                 'nama_w' => 'Bunker dan Goa Jepang',
-                'gambar_w' => 'assets\img\data\2.jpg',
+                'gambar_w' => 'assets/img/data/2.jpg',
                 'desk_w' => 'Situs bersejarah peninggalan Perang Dunia II berupa bunker dan goa yang digunakan tentara Jepang, menjadi destinasi wisata sejarah di Sorong.',
                 'user_id' => 9,
                 'kategori_wisata_id' => 2, // Wisata Sejarah
@@ -39,14 +39,14 @@ class WisataSeeder extends Seeder
             ],
             [
                 'nama_w' => 'Pulau Raam',
-                'gambar_w' => 'assets\img\data\4.jpg',
+                'gambar_w' => 'assets/img/data/4.jpg',
                 'desk_w' => 'Pulau kecil di sekitar Sorong yang menawarkan wisata bahari, kehidupan masyarakat lokal, dan pemandangan laut yang eksotis.',
                 'user_id' => 2,
                 'kategori_wisata_id' => 1, // Wisata Alam
             ],
             [
                 'nama_w' => 'Vihara Buddha Jayanti',
-                'gambar_w' => 'assets\img\data\5.jpg',
+                'gambar_w' => 'assets/img/data/5.jpg',
                 'desk_w' => 'Tempat ibadah umat Buddha yang juga menjadi destinasi wisata religi dengan arsitektur khas dan suasana yang damai.',
                 'user_id' => 9,
                 'kategori_wisata_id' => 8, // Wisata Religi
