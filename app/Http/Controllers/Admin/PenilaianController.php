@@ -48,14 +48,11 @@ class PenilaianController extends Controller
 
         });
     })
-
     ->orderBy('id', 'desc')
     ->paginate(7);
-
 return view('admin.penilaian.index', compact('datas'))
     ->with('i', (request()->input('page', 1) - 1) * 7);
     }
-
 
     // Tampilkan form tambah data
     public function create()

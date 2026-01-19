@@ -20,7 +20,7 @@
                             <h2>Jelajahi Keindahan Wisata</h2>
                             {{-- <img src="{{ asset('assets/img/logo.png') }}" class="" width="10px" alt="" srcset="" style="width: 200px"> --}}
                             <h1>Kota Sorong</h1>
-                            <div class="border-button"><a href="#wisata">Jelajahi</a></div>
+                            <div class="border-button"><a href="{{route('wisata')}}">Jelajahi</a></div>
                         </div>
                         <div class="container">
                             <div class="row">

@@ -13,13 +13,15 @@ class KategoriWisataSeeder extends Seeder
      */
     public function run(): void
     {
-        $data = [
-            ['nama_ktg' => 'Wisata Alam'],
-            ['nama_ktg' => 'Wisata Budaya'],
-            ['nama_ktg' => 'Wisata Sejarah'],
-            ['nama_ktg' => 'Wisata Religi'],
-            ['nama_ktg' => 'Wisata Kuliner'],
-            ['nama_ktg' => 'Wisata Edukasi'],
+         $data = [
+            ['nama_ktg' => 'Wisata Alam'],        // id = 1
+            ['nama_ktg' => 'Wisata Budaya'],      // id = 2
+            ['nama_ktg' => 'Wisata Cagar Alam'],  // id = 3
+            ['nama_ktg' => 'Wisata Gua'],         // id = 4
+            ['nama_ktg' => 'Wisata Pantai'],      // id = 5
+            ['nama_ktg' => 'Wisata Pantai dan Kuliner'], // id = 6
+            ['nama_ktg' => 'Wisata Pantai dan Olahraga'], // id = 7
+            ['nama_ktg' => 'Wisata Religi'],      // id = 8
         ];
 
         foreach ($data as $item) {
