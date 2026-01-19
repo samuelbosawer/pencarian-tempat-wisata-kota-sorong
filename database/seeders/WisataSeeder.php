@@ -67,7 +67,7 @@ class WisataSeeder extends Seeder
             ],
             [
                 'nama_w' => 'Taman Faith',
-                'gambar_w' => '',
+                'gambar_w' => 'assets/img/data/Taman Faith.jpg',
                 'desk_w' => 'Taman terbuka hijau sebagai ruang publik dan tempat bersantai.',
                 'user_id' => 9,
                 'kategori_wisata_id' => 1,
@@ -78,7 +78,7 @@ class WisataSeeder extends Seeder
           
             [
                 'nama_w' => 'Bungker Jepang 2',
-                'gambar_w' => '',
+                'gambar_w' => 'assets/img/data/bungker jepang  2.jpg',
                 'desk_w' => 'Bangunan bersejarah yang menjadi saksi perjuangan masa lalu.',
                 'user_id' => 9,
                 'kategori_wisata_id' => 2,
@@ -87,14 +87,14 @@ class WisataSeeder extends Seeder
             // Cagar Alam
             [
                 'nama_w' => 'Hutan Wisata Arboretum',
-                'gambar_w' => 'assets/img/data/7.jpg',
+                'gambar_w' => 'assets/img/data/hutan wisata arboretum.jpg',
                 'desk_w' => 'Kawasan hutan konservasi dengan berbagai jenis flora.',
                 'user_id' => 9,
                 'kategori_wisata_id' => 3,
             ],
             [
                 'nama_w' => 'Taman Wisata Mangrove Klawalu Sorong',
-                'gambar_w' => 'assets/img/data/8.jpg',
+                'gambar_w' => 'assets/img/data/wisata Taman Mangrove sorong.jpg',
                 'desk_w' => 'Wisata edukasi dan konservasi hutan mangrove.',
                 'user_id' => 9,
                 'kategori_wisata_id' => 3,
@@ -103,65 +103,53 @@ class WisataSeeder extends Seeder
             // Wisata Gua
             [
                 'nama_w' => 'Goa Jepang',
-                'gambar_w' => 'assets/img/data/9.jpg',
+                'gambar_w' => 'assets/img/data/bungker jepang  1.jpg',
                 'desk_w' => 'Goa bersejarah peninggalan Jepang di masa perang.',
                 'user_id' => 9,
                 'kategori_wisata_id' => 4,
             ],
-            [
-                'nama_w' => 'Goa Jepang Tsiof',
-                'gambar_w' => 'assets/img/data/10.jpg',
-                'desk_w' => 'Goa alami yang memiliki nilai sejarah dan wisata.',
-                'user_id' => 9,
-                'kategori_wisata_id' => 4,
-            ],
+           
 
             // Wisata Pantai
             [
                 'nama_w' => 'Dermaga Doom',
-                'gambar_w' => 'assets/img/data/11.jpg',
+                'gambar_w' => 'assets/img/data/Dermaga Doom.jpg',
                 'desk_w' => 'Dermaga bersejarah dengan panorama laut yang indah.',
                 'user_id' => 9,
                 'kategori_wisata_id' => 5,
             ],
             [
                 'nama_w' => 'MOOI Park',
-                'gambar_w' => 'assets/img/data/12.jpg',
+                'gambar_w' => 'assets/img/data/pantai mooi park.jpg',
                 'desk_w' => 'Taman wisata pantai modern untuk rekreasi keluarga.',
                 'user_id' => 9,
                 'kategori_wisata_id' => 5,
             ],
             [
                 'nama_w' => 'Panorama Beach',
-                'gambar_w' => 'assets/img/data/13.jpg',
+                'gambar_w' => 'assets/img/data/pantai  panorama beach.jpg',
                 'desk_w' => 'Pantai dengan pemandangan alam yang menawan.',
                 'user_id' => 9,
                 'kategori_wisata_id' => 5,
             ],
             [
                 'nama_w' => 'Pantai Alinda',
-                'gambar_w' => 'assets/img/data/14.jpg',
+                'gambar_w' => 'assets/img/data/pantai alinda.jpg',
                 'desk_w' => 'Pantai favorit masyarakat lokal untuk bersantai.',
                 'user_id' => 9,
                 'kategori_wisata_id' => 5,
             ],
             [
                 'nama_w' => 'Pantai Cinta',
-                'gambar_w' => 'assets/img/data/15.jpg',
+                'gambar_w' => 'assets/img/data/pulau cinta.jpg',
                 'desk_w' => 'Pantai dengan suasana romantis dan pasir putih.',
                 'user_id' => 9,
                 'kategori_wisata_id' => 5,
             ],
+           
             [
-                'nama_w' => 'Pantai Dofior',
-                'gambar_w' => 'assets/img/data/16.jpg',
-                'desk_w' => 'Pantai alami dengan ombak yang tenang.',
-                'user_id' => 9,
-                'kategori_wisata_id' => 5,
-            ],
-            [
-                'nama_w' => 'Pantai Karnindi',
-                'gambar_w' => 'assets/img/data/17.jpg',
+                'nama_w' => 'Pantai Alinda',
+                'gambar_w' => 'assets/img/data/pantai alinda.jpg',
                 'desk_w' => 'Pantai dengan keindahan laut dan pasir putih.',
                 'user_id' => 9,
                 'kategori_wisata_id' => 5,
@@ -176,14 +164,14 @@ class WisataSeeder extends Seeder
             ],
             [
                 'nama_w' => 'Pantai Saoka',
-                'gambar_w' => 'assets/img/data/20.jpg',
+                'gambar_w' => 'assets/img/data/saoka beach resort sorong.jpg',
                 'desk_w' => 'Pantai populer dengan pemandangan matahari terbenam.',
                 'user_id' => 9,
                 'kategori_wisata_id' => 5,
             ],
             [
                 'nama_w' => 'Pantai Saupapir',
-                'gambar_w' => 'assets/img/data/21.jpg',
+                'gambar_w' => 'assets/img/data/pantai saupapir.jpg',
                 'desk_w' => 'Pantai alami yang masih terjaga keasriannya.',
                 'user_id' => 9,
                 'kategori_wisata_id' => 5,
@@ -197,14 +185,14 @@ class WisataSeeder extends Seeder
             ],
             [
                 'nama_w' => 'Pantai Tanjung Batu',
-                'gambar_w' => 'assets/img/data/23.jpg',
+                'gambar_w' => 'assets/img/data/pantai tanjung batu.jpg',
                 'desk_w' => 'Pantai berbatu dengan panorama laut terbuka.',
                 'user_id' => 9,
                 'kategori_wisata_id' => 5,
             ],
             [
                 'nama_w' => 'Pantai Tiberias',
-                'gambar_w' => 'assets/img/data/24.jpg',
+                'gambar_w' => 'assets/img/data/pantai tiberias.jpg',
                 'desk_w' => 'Pantai wisata keluarga dengan fasilitas pendukung.',
                 'user_id' => 9,
                 'kategori_wisata_id' => 5,
@@ -213,7 +201,7 @@ class WisataSeeder extends Seeder
             // Pantai + Kuliner
             [
                 'nama_w' => 'Pantai dan Pusat Jajanan Tembok Berlin',
-                'gambar_w' => 'assets/img/data/25.jpg',
+                'gambar_w' => 'assets/img/data/Reklamasi sorong(tembok Berlin).jpg',
                 'desk_w' => 'Pantai dengan pusat kuliner khas Sorong.',
                 'user_id' => 9,
                 'kategori_wisata_id' => 6,
@@ -222,14 +210,14 @@ class WisataSeeder extends Seeder
             // Pantai + Olahraga
             [
                 'nama_w' => 'Kasuari Valley Beach Resort Sorong',
-                'gambar_w' => 'assets/img/data/26.jpg',
+                'gambar_w' => 'assets/img/data/kasuari valley beach resort sorong.jpg',
                 'desk_w' => 'Resort pantai dengan fasilitas olahraga dan rekreasi.',
                 'user_id' => 9,
                 'kategori_wisata_id' => 7,
             ],
             [
                 'nama_w' => 'Saoka Beach Resort',
-                'gambar_w' => 'assets/img/data/27.jpg',
+                'gambar_w' => 'assets/img/data/saoka beach resort sorong.jpg',
                 'desk_w' => 'Resort pantai dengan aktivitas olahraga laut.',
                 'user_id' => 9,
                 'kategori_wisata_id' => 7,
@@ -238,7 +226,7 @@ class WisataSeeder extends Seeder
             // Religi
             [
                 'nama_w' => 'Saoka Honai Resort',
-                'gambar_w' => 'assets/img/data/28.jpg',
+                'gambar_w' => 'assets/img/data/saoka honai resto.jpg',
                 'desk_w' => 'Resort dengan nuansa budaya dan religi Papua.',
                 'user_id' => 9,
                 'kategori_wisata_id' => 8,

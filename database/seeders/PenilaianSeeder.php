@@ -53,6 +53,21 @@ class PenilaianSeeder extends Seeder
             ['user_id' => 6, 'wisata_id' => 5, 'saran_p' => 'Kebersihan area wisata perlu terus dijaga.'],
             ['user_id' => 7, 'wisata_id' => 5, 'saran_p' => 'Tempat ini cocok untuk wisata santai bersama keluarga.'],
             ['user_id' => 8, 'wisata_id' => 5, 'saran_p' => 'Pengelolaan wisata sudah baik namun masih bisa dikembangkan.'],
+
+
+             ['user_id' => 8, 'wisata_id' => 5, 'saran_p' => 'Pengelolaan wisata sudah baik namun masih bisa dikembangkan.'],
+
+              ['user_id' => 8, 'wisata_id' => 5, 'saran_p' => 'Pengelolaan wisata sudah baik namun masih bisa dikembangkan.'],
+
+
+               ['user_id' => 8, 'wisata_id' => 6, 'saran_p' => 'Pengelolaan wisata sudah baik namun masih bisa dikembangkan.'],
+
+                ['user_id' => 8, 'wisata_id' => 7, 'saran_p' => 'Pengelolaan wisata sudah baik namun masih bisa dikembangkan.'],
+
+                 ['user_id' => 8, 'wisata_id' => 8, 'saran_p' => 'Pengelolaan wisata sudah baik namun masih bisa dikembangkan.'],
+
+                  ['user_id' => 8, 'wisata_id' => 9, 'saran_p' => 'Pengelolaan wisata sudah baik namun masih bisa dikembangkan.'],
+                  ['user_id' => 8, 'wisata_id' => 10, 'saran_p' => 'Pengelolaan wisata sudah baik namun masih bisa dikembangkan.'],
         ];
 
         foreach ($data as $item) {

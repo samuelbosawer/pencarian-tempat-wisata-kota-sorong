@@ -2,10 +2,10 @@
 <header class="header-area header-sticky">
     <div class="container">
         <div class="row">
-            <div class="col-12">
+            <div class="col-xl-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
-                    <a href="index.html" class="logo">
+                    <a href="/" class="logo">
                         <img src="/visitor/assets/images/logo.png" alt="">
                     </a>
                     <!-- ***** Logo End ***** -->
@@ -29,6 +29,13 @@
                             <a class="{{ Route::is('wisata') ? 'active' : '' }}" href="{{ route('wisata') }}">
                                 Wisata
                             </a>
+                        </li>
+
+                        <li>
+                            <a class="{{ Route::is('kategori*') ? 'active' : '' }}" href="{{ route('kategori') }}">
+                                Kategori
+                            </a>
+
                         </li>
 
                         <li>
@@ -85,7 +92,7 @@
                             </li>
                         @else
                             <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('daftar') }}">Daftar Akun</a></li>
+                            <li><a href="{{ route('daftar') }}">Daftar</a></li>
                         @endif
 
                     </ul>

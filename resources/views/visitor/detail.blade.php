@@ -51,11 +51,38 @@
                         <p>Dikelola oleh: {{ $data->user->nama ?? 'Tidak Diketahui' }}</p>
                         {{-- Tambahkan elemen lain seperti lokasi, jam buka, dll. jika ada di model --}}
                     </div>
+
+
+
+                       <div class="row">
+                <div class="card mt-4">
+                    <div class="card-body text-center my-3">
+                        <h5 class="card-title">Analisis Rekomendasi (MOORA)</h5>
+                        <div class="row mt-3">
+                            <div class="col-md-6 border-end">
+                                <p class="text-muted mb-1">Skor Akhir</p>
+                                <h3 class="text-primary">{{ number_format($finalScore, 4) ?? '0' }}</h3>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="text-muted mb-1">Peringkat Wisata</p>
+                                <h3 class="text-success">#{{ $finalRank ?? '0' }}</h3>
+                            </div>
+                        </div>
+                        {{-- <p class="small text-muted mt-2">
+                            *Peringkat ini dihitung berdasarkan perbandingan kriteria dengan seluruh destinasi wisata
+                            lainnya.
+                        </p> --}}
+                    </div>
+                </div>
+            </div>
                 </div>
             </div>
 
+
+         
+
             {{-- Bagian Penilaian dan Review --}}
-            <div class="row">
+            <div class="row mt-3">
                 <div class="col-lg-12">
                     <div class="section-heading">
                         <h3>Penilaian dan Review</h3>
@@ -86,7 +113,7 @@
                                                         <li>
                                                             <strong>{{ $dp->kriteria->kriteria ?? 'Kriteria' }}:</strong>
                                                             {{ $dp->skalaPenilaian->nama_s ?? 'N/A' }}
-                                                         
+
                                                         </li>
                                                     @endforeach
                                                 </ul>
@@ -96,7 +123,7 @@
                                             {{-- Tombol Edit dan Hapus jika user login adalah pemilik --}}
                                             @if (auth()->check() && auth()->id() == $p->user_id)
                                                 <div class="mt-2">
-                                                    
+
                                                     <button type="button" class="btn btn-danger btn-sm"
                                                         data-bs-toggle="modal" data-bs-target="#deleteReviewModal"
                                                         onclick="setDeleteId({{ $p->id }})">
@@ -203,16 +230,15 @@
                 </div>
             </div>
         @endif
-<script>
-    // Fungsi untuk set ID hapus
-    function setDeleteId(penilaianId) {
-        // Asumsi route adalah 'review.destroy' dengan parameter id penilaian
-        // Jika route berbeda, ganti sesuai (misal 'hapusreview')
-        document.getElementById('deleteReviewForm').action = '{{ url("hapusreview") }}/' + penilaianId;
-    }
-</script>
-@endsection
+        <script>
+            // Fungsi untuk set ID hapus
+            function setDeleteId(penilaianId) {
+                // Asumsi route adalah 'review.destroy' dengan parameter id penilaian
+                // Jika route berbeda, ganti sesuai (misal 'hapusreview')
+                document.getElementById('deleteReviewForm').action = '{{ url('hapusreview') }}/' + penilaianId;
+            }
+        </script>
+    @endsection
 
-@section('scripts')
-
-@endsection
+    @section('scripts')
+    @endsection

@@ -13,6 +13,8 @@ Route::get('/detail/{id}', [App\Http\Controllers\HomeController::class, 'detail'
 Route::get('/rekomendasi', [App\Http\Controllers\HomeController::class, 'rekomendasi'])->name('rekomendasi');
 Route::get('/daftar', [App\Http\Controllers\HomeController::class, 'daftar'])->name('daftar');
 Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
+Route::get('/kategori', [App\Http\Controllers\HomeController::class, 'kategori'])->name('kategori');
+Route::get('/kategori/{id}', [App\Http\Controllers\HomeController::class, 'kategori_detail'])->name('kategori.detail');
 Route::get('/daftar/pilih/{id}', [App\Http\Controllers\HomeController::class, 'daftarpilih'])->name('daftarpilih');
 Route::post('/daftar/store', [App\Http\Controllers\HomeController::class, 'daftarstore'])->name('daftarstore');
 Route::post('/review/store', [App\Http\Controllers\HomeController::class, 'review'])->name('review');
