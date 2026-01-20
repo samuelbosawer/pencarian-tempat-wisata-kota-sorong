@@ -32,7 +32,7 @@ class WisataSeeder extends Seeder
 
             [
                 'nama_w' => 'Tugu Selamat Datang di Dofior',
-                'gambar_w' => 'assets/img/data/3.jpg',
+                'gambar_w' => 'assets/img/data/tugu selamat datang dofior.jpg',
                 'desk_w' => 'Ikon budaya yang menjadi simbol penyambutan di wilayah Dofior.',
                 'user_id' => 10,
                 'kategori_wisata_id' => 2,
