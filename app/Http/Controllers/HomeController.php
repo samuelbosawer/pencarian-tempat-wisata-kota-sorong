@@ -12,6 +12,7 @@ use App\Models\Wisata;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -126,8 +127,14 @@ class HomeController extends Controller
 
 
 
-        return view('visitor.detail', compact('data', 'penilaian', 'kriteria', 'skala',
-        'finalRank','finalScore'));
+        return view('visitor.detail', compact(
+            'data',
+            'penilaian',
+            'kriteria',
+            'skala',
+            'finalRank',
+            'finalScore'
+        ));
     }
 
     public function rekomendasi()
@@ -302,19 +309,79 @@ class HomeController extends Controller
     public function review(Request $request)
     {
 
-        $penilaian = Penilaian::create([
-            'user_id' => Auth::user()->id,
-            'saran_p' => $request->saran_p,
-            'wisata_id' =>  $request->wisata_id,
-        ]);
-        $detail = DetailPenilaian::create([
-            'penilaian_id' => $penilaian->id,
-            'kriteria_id' => $request->kriteria_id,
-            'skala_penilaian_id' =>  $request->skala_penilaian_id,
+        // Validasi
+        $request->validate([
+            'wisata_id' => 'required|exists:wisatas,id',
+            'saran_p'   => 'nullable|string',
+            'penilaian' => 'required|array', // array nilai per kriteria
         ]);
 
-        Alert::success('Berhasil', 'Data penilaian berhasil ditambahkan');
-        return redirect()->route('detail', $request->wisata_id);
+        DB::beginTransaction();
+
+        try {
+            // Simpan penilaian utama
+            $penilaian = Penilaian::create([
+                'user_id'   => Auth::id(),
+                'wisata_id' => $request->wisata_id,
+                'saran_p'   => $request->saran_p,
+            ]);
+
+            // Simpan detail penilaian (SEMUA KRITERIA)
+            foreach ($request->penilaian as $kriteria_id => $skala_id) {
+
+                DetailPenilaian::create([
+                    'penilaian_id'       => $penilaian->id,
+                    'kriteria_id'        => $kriteria_id,
+                    'skala_penilaian_id' => $skala_id,
+                ]);
+            }
+
+            DB::commit();
+
+            Alert::success('Berhasil', 'Penilaian berhasil ditambahkan');
+            return redirect()->route('detail', $request->wisata_id);
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            Alert::error('Gagal', 'Terjadi kesalahan saat menyimpan penilaian');
+            return back()->withInput();
+        }
+    }
+
+    public function review_edit(Request $request, $id)
+    {
+
+
+        $penilaian = Penilaian::findOrFail($id);
+
+        // Proteksi: hanya pemilik boleh edit
+        if (auth()->id() != $penilaian->user_id) {
+            abort(403);
+        }
+
+        // Update komentar
+        $penilaian->update([
+            'saran_p' => $request->saran_p,
+        ]);
+
+        // Update semua detail penilaian
+        if ($request->penilaian) {
+            foreach ($request->penilaian as $kriteria_id => $skala_id) {
+
+                DetailPenilaian::updateOrCreate(
+                    [
+                        'penilaian_id' => $penilaian->id,
+                        'kriteria_id'  => $kriteria_id,
+                    ],
+                    [
+                        'skala_penilaian_id' => $skala_id,
+                    ]
+                );
+            }
+        }
+
+        Alert::success('Berhasil', 'Penilaian berhasil diperbarui');
+        return back();
     }
 
     public function hapusreview($id)
@@ -326,6 +393,10 @@ class HomeController extends Controller
         Alert::success('Berhasil', 'Data penilaian berhasil dihapus');
         return redirect()->route('detail', $wisata_id);
     }
+
+
+
+
 
     public function kategori()
     {

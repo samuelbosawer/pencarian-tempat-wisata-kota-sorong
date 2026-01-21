@@ -18,6 +18,7 @@ Route::group(['middleware' => ['auth','role.custom:admin|usaha']], function () {
         require_once 'admin/skala.php';
         require_once 'admin/user.php';
         require_once 'admin/wisata.php';
+        require_once 'admin/admin.php';
        
     });
 });

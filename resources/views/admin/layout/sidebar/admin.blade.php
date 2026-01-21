@@ -14,6 +14,8 @@
         </li>
 
 
+
+
         <li class="menu-item @if ((Request::segment(1) == 'dashboard' && Request::segment(2) == 'wisata') || Request::segment(2) == 'kategori') active open @endif">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-map-alt"></i>
@@ -60,5 +62,12 @@
             <a href="{{ route('dashboard.rekomendasi') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-star"></i>
                 <div data-i18n="Analytics">Rekomendasi</div>
+            </a>
+        </li>
+
+         <li class="menu-item @if (Request::segment(1) == 'dashboard' && Request::segment(2) == 'admin') active @endif">
+            <a href="{{ route('dashboard.admin') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user"></i>
+                <div data-i18n="Analytics">Data Admin</div>
             </a>
         </li>

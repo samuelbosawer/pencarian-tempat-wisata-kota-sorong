@@ -18,6 +18,7 @@ Route::get('/kategori/{id}', [App\Http\Controllers\HomeController::class, 'kateg
 Route::get('/daftar/pilih/{id}', [App\Http\Controllers\HomeController::class, 'daftarpilih'])->name('daftarpilih');
 Route::post('/daftar/store', [App\Http\Controllers\HomeController::class, 'daftarstore'])->name('daftarstore');
 Route::post('/review/store', [App\Http\Controllers\HomeController::class, 'review'])->name('review');
+Route::put('/review/update{id}', [App\Http\Controllers\HomeController::class, 'review_edit'])->name('review_edit');
 Route::delete('/hapusreview/{id}', [App\Http\Controllers\HomeController::class, 'hapusreview'])->name('hapusreview');
 
 require_once 'admin.php';

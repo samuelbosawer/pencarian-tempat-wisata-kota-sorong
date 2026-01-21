@@ -11,18 +11,16 @@ use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Validation\Rule;
 
-class UserController extends Controller
+
+class AdminController extends Controller
 {
     // Tampilkan semua data
     public function index(Request $request)
     {
-        if(FacadesAuth::user()->hasRole('usaha'))
-        {
-           return redirect()->route('dashboard.user.detail',FacadesAuth::user()->id);
-        }
-
-
         $datas = User::whereNotNull('nama')
+            ->whereHas('roles', function ($q) {
+                $q->where('name', 'admin');
+            })
             ->when($request->s, function ($query) use ($request) {
                 $s = $request->s;
 
@@ -36,7 +34,7 @@ class UserController extends Controller
             })
             ->orderBy('id', 'desc')
             ->paginate(7);
-        return view('admin.user.index', compact('datas'))
+        return view('admin.admin.index', compact('datas'))
             ->with('i', (request()->input('page', 1) - 1) * 7);
     }
 
@@ -45,11 +43,10 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::where('name', '!=', 'admin')->get();
-        if(FacadesAuth::user()->hasRole('usaha'))
-        {
-           return redirect()->route('dashboard.user.ubah',FacadesAuth::user()->id);
+        if (FacadesAuth::user()->hasRole('usaha')) {
+            return redirect()->route('dashboard.admin.ubah', FacadesAuth::user()->id);
         }
-        return view('admin.user.create-update-show', compact('roles'));
+        return view('admin.admin.create-update-show', compact('roles'));
     }
 
     // Simpan data baru
@@ -62,7 +59,7 @@ class UserController extends Controller
             'tanggal_lahir'   => 'required|date',
             'alamat'          => 'required|string',
             'password'        => 'required|string|min:6|confirmed',
-            'role'            => 'required|string|exists:roles,name',
+            
         ],  [
             'nama.required' => 'Nama lengkap wajib diisi.',
             'email.required' => 'Email wajib diisi.',
@@ -75,8 +72,7 @@ class UserController extends Controller
             'password.required' => 'Password wajib diisi.',
             'password.min' => 'Password minimal 6 karakter.',
             'password.confirmed' => 'Konfirmasi password tidak sesuai.',
-            'role.required' => 'Role akses wajib dipilih.',
-            'role.exists' => 'Role yang dipilih tidak valid.',
+        
         ]);
 
 
@@ -95,10 +91,10 @@ class UserController extends Controller
         ]);
 
         // Assign role (Spatie)
-        $user->assignRole($validated['role']);
+        $user->assignRole('admin');
 
-        Alert::success('Berhasil', 'Data user berhasil ditambahkan');
-        return redirect()->route('dashboard.user');
+        Alert::success('Berhasil', 'Data admin berhasil ditambahkan');
+        return redirect()->route('dashboard.admin');
     }
 
     // Tampilkan detail satu data
@@ -107,11 +103,10 @@ class UserController extends Controller
         $roles = Role::where('name', '!=', 'admin')->get();
         $judul = 'Detail Data User';
         $data = User::where('id', $id)->first();
-         if(FacadesAuth::user()->hasRole('usaha'))
-        {
-           $data = User::where('id', FacadesAuth::user()->id)->first();
+        if (FacadesAuth::user()->hasRole('usaha')) {
+            $data = User::where('id', FacadesAuth::user()->id)->first();
         }
-        return view('admin.user.create-update-show', compact('roles', 'judul', 'data'));
+        return view('admin.admin.create-update-show', compact('roles', 'judul', 'data'));
     }
 
     // Tampilkan form edit data
@@ -120,20 +115,18 @@ class UserController extends Controller
         $roles = Role::where('name', '!=', 'admin')->get();
         $judul = 'Ubah Data User';
         $data = User::where('id', $id)->first();
-          if(FacadesAuth::user()->hasRole('usaha'))
-        {
-           $data = User::where('id', FacadesAuth::user()->id)->first();
+        if (FacadesAuth::user()->hasRole('usaha')) {
+            $data = User::where('id', FacadesAuth::user()->id)->first();
         }
-        return view('admin.user.create-update-show', compact('roles', 'judul', 'data'));
+        return view('admin.admin.create-update-show', compact('roles', 'judul', 'data'));
     }
 
     // Update data
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
-          if(FacadesAuth::user()->hasRole('usaha'))
-        {
-           $user = User::findOrFail(FacadesAuth::user()->id);
+        if (FacadesAuth::user()->hasRole('usaha')) {
+            $user = User::findOrFail(FacadesAuth::user()->id);
         }
         $validated = $request->validate(
             [
@@ -147,7 +140,7 @@ class UserController extends Controller
                 'tanggal_lahir'   => 'required|date',
                 'alamat'          => 'required|string',
                 'password'        => 'nullable|string|min:6|confirmed',
-                'role'            => 'required|string|exists:roles,name',
+                
             ],
             [
                 'nama.required' => 'Nama lengkap wajib diisi.',
@@ -160,8 +153,6 @@ class UserController extends Controller
                 'alamat.required' => 'Alamat wajib diisi.',
                 'password.min' => 'Password minimal 6 karakter.',
                 'password.confirmed' => 'Konfirmasi password tidak sesuai.',
-                'role.required' => 'Role akses wajib dipilih.',
-                'role.exists' => 'Role yang dipilih tidak valid.',
             ]
         );
 
@@ -181,11 +172,10 @@ class UserController extends Controller
             ]);
         }
 
-        // Update role
-        $user->syncRoles([$validated['role']]);
+    
 
-        Alert::success('Berhasil', 'Data user berhasil diperbarui');
-        return redirect()->route('dashboard.user');
+        Alert::success('Berhasil', 'Data admin berhasil diperbarui');
+        return redirect()->route('dashboard.admin');
     }
 
     // Hapus data
@@ -196,12 +186,12 @@ class UserController extends Controller
         // Proteksi user admin (opsional tapi disarankan)
         if ($user->hasRole('admin')) {
             Alert::error('Gagal', 'User admin tidak dapat dihapus');
-            return redirect()->route('dashboard.user');
+            return redirect()->route('dashboard.admin');
         }
 
         $user->delete();
 
-        Alert::success('Berhasil', 'Data user berhasil dihapus');
-        return redirect()->route('dashboard.user');
+        Alert::success('Berhasil', 'Data admin berhasil dihapus');
+        return redirect()->route('dashboard.admin');
     }
 }

@@ -1,18 +1,20 @@
 @extends('visitor.layout.tamplate')
 
 @section('content')
-
     <div class="visit-country">
         <div class="container">
+
+            {{-- HEADER --}}
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-heading">
                         <h2>Detail Destinasi Wisata: {{ $data->nama_w }}</h2>
                         <p>Informasi lengkap mengenai destinasi wisata ini di Kota Sorong.</p>
-
                     </div>
                 </div>
             </div>
+
+            {{-- DETAIL WISATA --}}
             <div class="row">
                 <div class="col-lg-8">
                     <div class="item">
@@ -30,215 +32,204 @@
                                         <img src="https://placehold.co/600x400?text=Gambar+Tidak+Tersedia"
                                             alt="Gambar Tidak Tersedia">
                                     @endif
+
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="right-content">
                                     <h4>{{ $data->nama_w }}</h4>
                                     <span>Kategori: {{ $data->kategoriWisata->nama_ktg ?? 'Tidak Diketahui' }}</span>
-                                    <p>{{ $data->desk_w ?? 'Deskripsi tidak tersedia.' }}</p>
-                                    <p><i class="fa fa-user"></i> {{ $data->penilaian->count() }} Penilaian</p>
-                                    {{-- Tambahkan informasi lain jika diperlukan, seperti alamat, dll. --}}
+                                    <p>{{ $data->desk_w }}</p>
+                                    <p><i class="fa fa-user"></i> {{ $penilaian->count() }} Penilaian</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                {{-- SIDEBAR --}}
                 <div class="col-lg-4">
-                    {{-- Bagian tambahan untuk informasi samping, seperti peta atau info kontak --}}
                     <div class="sidebar">
                         <h5>Informasi Tambahan</h5>
-                        <p>Dikelola oleh: {{ $data->user->nama ?? 'Tidak Diketahui' }}</p>
-                        {{-- Tambahkan elemen lain seperti lokasi, jam buka, dll. jika ada di model --}}
+                        <p>Dikelola oleh: {{ $data->user->nama ?? '-' }}</p>
                     </div>
 
-
-
-                       <div class="row">
-                <div class="card mt-4">
-                    <div class="card-body text-center my-3">
-                        <h5 class="card-title">Analisis Rekomendasi (MOORA)</h5>
-                        <div class="row mt-3">
-                            <div class="col-md-6 border-end">
-                                <p class="text-muted mb-1">Skor Akhir</p>
-                                <h3 class="text-primary">{{ number_format($finalScore, 4) ?? '0' }}</h3>
-                            </div>
-                            <div class="col-md-6">
-                                <p class="text-muted mb-1">Peringkat Wisata</p>
-                                <h3 class="text-success">#{{ $finalRank ?? '0' }}</h3>
+                    {{-- MOORA --}}
+                    <div class="card mt-4">
+                        <div class="card-body text-center my-3">
+                            <h5>Analisis Rekomendasi (MOORA)</h5>
+                            <div class="row mt-3">
+                                <div class="col-md-6 border-end">
+                                    <p class="text-muted mb-1">Skor Akhir</p>
+                                    <h3 class="text-primary">{{ number_format($finalScore, 4) ?? '0' }}</h3>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="text-muted mb-1">Peringkat</p>
+                                    <h3 class="text-success">#{{ $finalRank ?? '0' }}</h3>
+                                </div>
                             </div>
                         </div>
-                        {{-- <p class="small text-muted mt-2">
-                            *Peringkat ini dihitung berdasarkan perbandingan kriteria dengan seluruh destinasi wisata
-                            lainnya.
-                        </p> --}}
                     </div>
                 </div>
             </div>
-                </div>
-            </div>
 
-
-         
-
-            {{-- Bagian Penilaian dan Review --}}
-            <div class="row mt-3">
+            {{-- PENILAIAN --}}
+            <div class="row mt-4">
                 <div class="col-lg-12">
-                    <div class="section-heading">
-                        <h3>Penilaian dan Review</h3>
-                        <div class="my-3">
-                            @if (auth()->check())
-                                {{-- Tombol untuk membuka modal --}}
-                                <a type="button" class="border-button text-white  bg-dark p-2 shadow rounded "
-                                    data-toggle="modal" data-bs-toggle="modal" data-bs-target="#addReviewModal">
-                                    Tambah Penilaian <i class="fa fa-pen"></i>
-                                </a>
-                            @else
-                                <a href="{{ route('login') }}" class="border-button text-white bg-dark p-2 shadow rounded">
-                                    Tambah Penilaian <i class="fa fa-pen"></i>
-                                </a>
+                    <h3>Penilaian dan Review</h3>
+
+                    {{-- TOMBOL TAMBAH --}}
+                    @if (auth()->check())
+                        <button class="btn btn-dark mb-3" data-bs-toggle="modal" data-bs-target="#addReviewModal">
+                            Tambah Penilaian <i class="fa fa-pen"></i>
+                        </button>
+                    @else
+                        <a href="{{ route('login') }}" class="btn btn-dark mb-3">Login untuk memberi penilaian</a>
+                    @endif
+
+                    {{-- LIST REVIEW --}}
+                    @forelse ($penilaian as $p)
+                        <div class="review-item border p-3 mb-3 rounded">
+                            <h5>{{ $p->user->nama ?? 'Anonim' }}</h5>
+
+                            <ul>
+                                @foreach ($p->detailPenilaian as $dp)
+                                    <li>
+                                        <strong>{{ $dp->kriteria->kriteria }}:</strong>
+                                        {{ $dp->skalaPenilaian->nama_s }}
+                                    </li>
+                                @endforeach
+                            </ul>
+
+                            <p><strong>Komentar:</strong> {{ $p->saran_p }}</p>
+
+                            {{-- TOMBOL EDIT --}}
+                            @if (auth()->id() == $p->user_id)
+                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#editReviewModal{{ $p->id }}">
+                                    Edit <i class="fa fa-edit"></i>
+                                </button>
                             @endif
                         </div>
+                    @empty
+                        <p>Belum ada penilaian.</p>
+                    @endforelse
+                </div>
+            </div>
 
-                        @if ($penilaian->count() > 0)
-                            @foreach ($penilaian as $p)
-                                <div class="review-item">
-                                    <div class="row">
-                                        <div class="col-lg-8">
-                                            <h5>Review oleh: {{ $p->user->nama ?? 'Anonim' }}</h5>
-                                            {{-- Tampilkan rating berdasarkan detail penilaian --}}
-                                            @if ($p->detailPenilaian)
-                                                <ul class="rating-list">
-                                                    @foreach ($p->detailPenilaian as $dp)
-                                                        <li>
-                                                            <strong>{{ $dp->kriteria->kriteria ?? 'Kriteria' }}:</strong>
-                                                            {{ $dp->skalaPenilaian->nama_s ?? 'N/A' }}
+        </div>
+    </div>
 
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            @endif
-                                            <p><strong>Saran/Komentar:</strong> {{ $p->saran_p ?? 'Tidak ada komentar.' }}
-                                            </p>
-                                            {{-- Tombol Edit dan Hapus jika user login adalah pemilik --}}
-                                            @if (auth()->check() && auth()->id() == $p->user_id)
-                                                <div class="mt-2">
+    {{-- ================= MODAL TAMBAH PENILAIAN ================= --}}
+    @if (auth()->check())
+        <div class="modal fade" id="addReviewModal">
+            <div class="modal-dialog modal-lg">
+                <form action="{{ route('review') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="wisata_id" value="{{ $data->id }}">
 
-                                                    <button type="button" class="btn btn-danger btn-sm"
-                                                        data-bs-toggle="modal" data-bs-target="#deleteReviewModal"
-                                                        onclick="setDeleteId({{ $p->id }})">
-                                                        Hapus <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </div>
-                                            @endif
-                                            <hr>
-                                        </div>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5>Tambah Penilaian</h5>
+                            <button class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <div class="modal-body">
+
+                            <div class="mb-3">
+                                <label>Komentar</label>
+                                <textarea class="form-control" name="saran_p"></textarea>
+                            </div>
+
+                            <h6>Penilaian Kriteria</h6>
+
+                            @foreach ($kriteria as $k)
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <strong>{{ $k->kriteria }}</strong>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select name="penilaian[{{ $k->id }}]" class="form-control" required>
+                                            <option value="">Pilih Nilai</option>
+                                            @foreach ($skala as $s)
+                                                <option value="{{ $s->id }}">{{ $s->nama_s }}
+                                                    ({{ $s->nilai_s }})</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             @endforeach
-                        @else
-                            <p>Belum ada penilaian untuk destinasi ini.</p>
-                        @endif
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button class="btn btn-primary">Simpan</button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
+    @endif
 
-        {{-- Modal untuk Tambah Penilaian --}}
-        @if (auth()->check())
-            <div class="modal fade" id="addReviewModal" tabindex="-1" role="dialog" aria-labelledby="addReviewModalLabel"
-                aria-hidden="true">
+    {{-- ================= MODAL EDIT PENILAIAN ================= --}}
+    @foreach ($penilaian as $p)
+        @if (auth()->id() == $p->user_id)
+            <div class="modal fade" id="editReviewModal{{ $p->id }}">
+                <div class="modal-dialog modal-lg">
+                    <form action="{{ route('review_edit', $p->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
 
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="addReviewModalLabel">Tambah Penilaian untuk {{ $data->nama_w }}
-                            </h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <form action="{{ route('review') }}" method="POST">
-                            @csrf
-                            <div class="modal-body">
-                                {{-- Hidden field untuk wisata_id --}}
-                                <input type="hidden" name="wisata_id" value="{{ $data->id }}">
-
-                                {{-- Komentar/Saran --}}
-                                <div class="form-group mb-3">
-                                    <label for="saran_p">Komentar/Saran:</label>
-                                    <textarea class="form-control" id="saran_p" name="saran_p" rows="3"
-                                        placeholder="Tulis komentar Anda di sini..."></textarea>
-                                </div>
-
-                                <div class="form-group mb-3">
-                                    <label for="kriteria_id">Kriteria</label>
-                                    <select class="form-control" name="kriteria_id" required>
-                                        <option value="">Pilih Kriteria</option>
-                                        @if (isset($kriteria))
-                                            @foreach ($kriteria as $k)
-                                                <option value="{{ $k->id }}">{{ $k->kriteria }} </option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                </div>
-
-                                <div class="form-group mb-3">
-                                    <label for="skala_penilaian_id">Penilaian</label>
-                                    <select class="form-control" name="skala_penilaian_id" required>
-                                        <option value="">Pilih Penilaian</option>
-                                        @if (isset($skala))
-                                            @foreach ($skala as $s)
-                                                <option value="{{ $s->id }}">{{ $s->nama_s }} </option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                </div>
-
-
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                                <button type="submit" class="btn btn-primary">Simpan Penilaian</button>
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5>Edit Penilaian</h5>
+                                <button class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
-                        </form>
-                    </div>
+
+                            <div class="modal-body">
+
+                                <div class="mb-3">
+                                    <label>Komentar</label>
+                                    <textarea class="form-control" name="saran_p">{{ $p->saran_p }}</textarea>
+                                </div>
+
+                                <h6>Penilaian Kriteria</h6>
+
+                                @foreach ($kriteria as $k)
+                                    @php
+                                        $nilai = $p->detailPenilaian->where('kriteria_id', $k->id)->first();
+                                    @endphp
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <strong>{{ $k->kriteria }}</strong>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <select name="penilaian[{{ $k->id }}]" class="form-control" required>
+                                                <option value="">Pilih Nilai</option>
+                                                @foreach ($skala as $s)
+                                                    <option value="{{ $s->id }}"
+                                                        @if ($nilai && $nilai->skala_penilaian_id == $s->id) selected @endif  required>
+                                                        {{ $s->nama_s }} ({{ $s->nilai_s }})
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                @endforeach
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                <button class="btn btn-primary">Update</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         @endif
+    @endforeach
 
-
-        {{-- Modal untuk Hapus Penilaian --}}
-        @if (auth()->check())
-            <div class="modal fade" id="deleteReviewModal" tabindex="-1" role="dialog"
-                aria-labelledby="deleteReviewModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="deleteReviewModalLabel">Hapus Penilaian</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Apakah Anda yakin ingin menghapus penilaian ini?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                            <form action="" method="POST" id="deleteReviewForm" style="display: inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Hapus</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endif
-        <script>
-            // Fungsi untuk set ID hapus
-            function setDeleteId(penilaianId) {
-                // Asumsi route adalah 'review.destroy' dengan parameter id penilaian
-                // Jika route berbeda, ganti sesuai (misal 'hapusreview')
-                document.getElementById('deleteReviewForm').action = '{{ url('hapusreview') }}/' + penilaianId;
-            }
-        </script>
-    @endsection
-
-    @section('scripts')
-    @endsection
+@endsection

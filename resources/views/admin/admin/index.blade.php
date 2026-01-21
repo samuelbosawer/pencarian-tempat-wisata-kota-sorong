@@ -15,10 +15,9 @@
                     <div class="table-responsive text-nowrap p-5">
                         <div class="row g-2 mb-3 align-items-center">
                             <div class="col-md-6 col-12">
-                                @if (!Auth::user()->hasAnyRole(['admin', 'usaha', 'pengunjung']))
-                                    <a class="btn btn-primary" href="{{ route('dashboard.user.tambah') }}">Tambah Data User
+                              
+                                    <a class="btn btn-primary" href="{{ route('dashboard.admin.tambah') }}">Tambah Data Admin
                                         <i class="bx bx-plus me-1"></i></a>
-                                @endif
                             </div>
                             <div class="col-md-6 col-12">
                                 @include('admin.layout.search')
@@ -41,7 +40,7 @@
                                 <tr>
                                     <td>{{ ++$i }}</td>
                                     <td class="fw-bolder"> <a
-                                            href="{{ route('dashboard.user.ubah', $data->id) }}">{{ $data->nama }}</a>
+                                            href="{{ route('dashboard.admin.ubah', $data->id) }}">{{ $data->nama }}</a>
                                     </td>
                                     <td>{{ $data->email }}</td>
                                     <td>{{ $data->tempat_lahir ?? '-' }},
@@ -55,16 +54,16 @@
                                             </button>
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item"
-                                                    href="{{ route('dashboard.user.detail', $data->id) }}">
+                                                    href="{{ route('dashboard.admin.detail', $data->id) }}">
                                                     <i class="bx bx-box me-1"></i> Detail</a>
 
 
-                                                @if (Auth::user()->hasAnyRole(['admin']))
+                                                
                                                     <a class="dropdown-item"
-                                                        href="{{ route('dashboard.user.ubah', $data->id) }}"><i
+                                                        href="{{ route('dashboard.admin.ubah', $data->id) }}"><i
                                                             class="bx bx-edit-alt me-1"></i> Ubah</a>
 
-                                                    <form action="{{ route('dashboard.user.hapus', $data->id) }}"
+                                                    <form action="{{ route('dashboard.admin.hapus', $data->id) }}"
                                                         method="POST"
                                                         onsubmit="return confirm('Yakin ingin menghapus data ini?');">
                                                         @csrf
@@ -74,7 +73,6 @@
                                                             <i class="bx bx-trash me-1"></i> Hapus
                                                         </button>
                                                     </form>
-                                                @endif
                                             </div>
                                         </div>
 
