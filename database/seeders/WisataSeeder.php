@@ -59,8 +59,8 @@ class WisataSeeder extends Seeder
 
              // Wisata Alam
             [
-                'nama_w' => 'Taman Alldear',
-                'gambar_w' => '',
+                'nama_w' => 'Taman Aldear',
+                'gambar_w' => 'assets/img/data/taman wisata alam aldear.png',
                 'desk_w' => 'Taman kota dengan nuansa alam yang asri dan cocok untuk rekreasi keluarga.',
                 'user_id' => 9,
                 'kategori_wisata_id' => 1,
@@ -157,7 +157,7 @@ class WisataSeeder extends Seeder
            
             [
                 'nama_w' => 'Pantai Pulau Tsiof',
-                'gambar_w' => 'assets/img/data/19.jpg',
+                'gambar_w' => 'assets/img/data/pulau soop.png',
                 'desk_w' => 'Pantai pulau kecil dengan panorama laut biru.',
                 'user_id' => 9,
                 'kategori_wisata_id' => 5,
@@ -169,6 +169,16 @@ class WisataSeeder extends Seeder
                 'user_id' => 9,
                 'kategori_wisata_id' => 5,
             ],
+
+              [
+                'nama_w' => 'Saoka Honai Resort',
+                'gambar_w' => 'assets/img/data/saoka honai resto.jpg',
+                'desk_w' => 'Resort dengan nuansa budaya dan religi Papua.',
+                'user_id' => 9,
+                'kategori_wisata_id' => 5,
+            ],
+
+
             [
                 'nama_w' => 'Pantai Saupapir',
                 'gambar_w' => 'assets/img/data/pantai saupapir.jpg',
@@ -178,7 +188,7 @@ class WisataSeeder extends Seeder
             ],
             [
                 'nama_w' => 'Pantai Tampagaram',
-                'gambar_w' => 'assets/img/data/22.jpg',
+                'gambar_w' => 'assets/img/data/pantai tampagaram.png',
                 'desk_w' => 'Pantai dengan suasana tenang dan alami.',
                 'user_id' => 9,
                 'kategori_wisata_id' => 5,
@@ -215,25 +225,12 @@ class WisataSeeder extends Seeder
                 'user_id' => 9,
                 'kategori_wisata_id' => 7,
             ],
-            [
-                'nama_w' => 'Saoka Beach Resort',
-                'gambar_w' => 'assets/img/data/saoka beach resort sorong.jpg',
-                'desk_w' => 'Resort pantai dengan aktivitas olahraga laut.',
-                'user_id' => 9,
-                'kategori_wisata_id' => 7,
-            ],
-
+ 
             // Religi
-            [
-                'nama_w' => 'Saoka Honai Resort',
-                'gambar_w' => 'assets/img/data/saoka honai resto.jpg',
-                'desk_w' => 'Resort dengan nuansa budaya dan religi Papua.',
-                'user_id' => 9,
-                'kategori_wisata_id' => 8,
-            ],
+          
             [
                 'nama_w' => 'Tanah Klasis GKI Sorong',
-                'gambar_w' => 'assets/img/data/29.jpg',
+                'gambar_w' => 'assets/img/data/taman wisata  gereja.png',
                 'desk_w' => 'Tempat bersejarah dan pusat kegiatan keagamaan.',
                 'user_id' => 9,
                 'kategori_wisata_id' => 8,
