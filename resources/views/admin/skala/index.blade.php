@@ -13,7 +13,8 @@
                     <div class="table-responsive text-nowrap p-5">
                         <div class="row g-2 mb-3 align-items-center">
                             <div class="col-md-6 col-12">
-                              
+                               <a class="btn btn-primary" href="{{ route('dashboard.skala.tambah') }}">Tambah Data Skala
+                                        <i class="bx bx-plus me-1"></i></a>
                             </div>
                             <div class="col-md-6 col-12">
                                 @include('admin.layout.search')
